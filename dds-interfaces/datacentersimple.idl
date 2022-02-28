@@ -1,0 +1,5 @@
+//DataCenterSimple
+struct DataCenterSimple {
+	unsigned long id;//@key
+	//IDL-re lefordítani: simulation, List.of(host0));
+};

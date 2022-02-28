@@ -1,0 +1,9 @@
+//VmSimple
+struct VmSimple {
+    unsigned short id; //@key
+    unsigned long mips; // Million Instructions Per Second: the raw speed of the virtual machine.
+    unsigned long numberOfPEs; // The number of Processing Elements allocated to the virtual machine.
+    unsigned long ram; // Sets RAM capacity in Megabytes.
+    unsigned long bw; // Sets the bandwidth capacity (in Megabits/s)
+    unsigned long size; // Sets the storage size (capacity) of the VM image in Megabytes.
+};
