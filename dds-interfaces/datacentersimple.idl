@@ -1,5 +1,7 @@
-//DataCenterSimple
-struct DataCenterSimple {
-	unsigned long id;//@key
-	long timestampOfReport; //@foreign-key
+/*  This file was automatically generated.
+     Modify the type definition to fit your needs
+*/
+struct datacentersimple {
+    long id; //@key
+    long timestampOfReport; //@foreign-key
 };
