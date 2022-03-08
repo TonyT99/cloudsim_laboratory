@@ -1,6 +1,9 @@
 //VmSimple
 struct VmSimple {
     unsigned short id; //@key
+    unsigned short hostId; //@foreign-key
+    unsigned short datacenterId; //@foreign-key
+    long timestampOfReport; //@foreign-key
     unsigned long mips; // Million Instructions Per Second: the raw speed of the virtual machine.
     unsigned long numberOfPEs; // The number of Processing Elements allocated to the virtual machine.
     unsigned long ram; // Sets RAM capacity in Megabytes.

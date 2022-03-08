@@ -1,8 +1,9 @@
 //Simple Host
 struct HostSimple {
     unsigned short id; //@key
+    unsigned short datacenterId; //@foreign-key
+    long timestampOfReport; //@foreign-key
     unsigned long ram; // Sets RAM capacity in Megabytes.
     unsigned long bw; // Sets the bandwidth capacity (in Megabits/s)
     unsigned long size; // Sets the storage size (capacity) of the VM image in Megabytes.
-    //IDL-re kell fordítani: List.of(new PeSimple(20000))
 };

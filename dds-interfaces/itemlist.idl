@@ -1,5 +1,6 @@
 // List which specifies how many there are from each VM, host and DataCenter
 struct itemlist {
+    long timestamp; // The timestamp of the itemlist used to identify the DDS report.
     long VMnumber; // The number of VM-s in the DDS report
     long hostNumber; // The number of hosts in the DDS report
     long DataCenterNumber; // The number of DataCenter in the DDS report
