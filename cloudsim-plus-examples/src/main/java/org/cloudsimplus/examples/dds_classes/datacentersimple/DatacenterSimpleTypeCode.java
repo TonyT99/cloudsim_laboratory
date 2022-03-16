@@ -13,7 +13,7 @@ package org.cloudsimplus.examples.dds_classes.datacentersimple;
 
 import com.rti.dds.typecode.*;
 
-public class  datacentersimpleTypeCode {
+public class DatacenterSimpleTypeCode {
     public static final TypeCode VALUE = getTypeCode();
 
     private static TypeCode getTypeCode() {

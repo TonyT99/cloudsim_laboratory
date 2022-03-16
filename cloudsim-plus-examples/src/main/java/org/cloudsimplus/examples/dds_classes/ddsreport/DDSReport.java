@@ -16,17 +16,17 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class ddsreport   implements Copyable, Serializable{
+public class DDSReport implements Copyable, Serializable{
 
     public int timestamp = (int)0;
     public int VMnumber = (int)0;
     public int hostNumber = (int)0;
     public int DataCenterNumber = (int)0;
 
-    public ddsreport() {
+    public DDSReport() {
 
     }
-    public ddsreport (ddsreport other) {
+    public DDSReport(DDSReport other) {
 
         this();
         copy_from(other);
@@ -34,8 +34,8 @@ public class ddsreport   implements Copyable, Serializable{
 
     public static java.lang.Object create() {
 
-        ddsreport self;
-        self = new  ddsreport();
+        DDSReport self;
+        self = new DDSReport();
         self.clear();
         return self;
 
@@ -60,7 +60,7 @@ public class ddsreport   implements Copyable, Serializable{
             return false;
         }
 
-        ddsreport otherObj = (ddsreport)o;
+        DDSReport otherObj = (DDSReport)o;
 
         if(this.timestamp != otherObj.timestamp) {
             return false;
@@ -104,8 +104,8 @@ public class ddsreport   implements Copyable, Serializable{
     */
     public java.lang.Object copy_from(java.lang.Object src) {
 
-        ddsreport typedSrc = (ddsreport) src;
-        ddsreport typedDst = this;
+        DDSReport typedSrc = (DDSReport) src;
+        DDSReport typedDst = this;
 
         typedDst.timestamp = typedSrc.timestamp;
         typedDst.VMnumber = typedSrc.VMnumber;

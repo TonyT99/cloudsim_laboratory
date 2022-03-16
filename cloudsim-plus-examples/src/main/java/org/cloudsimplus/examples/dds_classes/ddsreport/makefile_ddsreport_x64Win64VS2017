@@ -64,7 +64,7 @@ all: $(CLASS_FILES)
 export Path := $(NDDSHOME)/lib/x64Win64VS2017;$(Path)
 
 ddsreportPublisher: ./org/cloudsimplus/examples/dds_classes/ddsreport/ddsreportPublisher.class
-	$(JAVA_PATH)  $(RTI_JAVA_OPTION) -classpath ".;$(RTI_CLASSPATH)" org.cloudsimplus.examples.dds_classes.ddsreport.ddsreportPublisher $(ARGS)
+	$(JAVA_PATH)  $(RTI_JAVA_OPTION) -classpath ".;$(RTI_CLASSPATH)" org.cloudsimplus.examples.dds_classes.ddsreport.DDSReportPublisher $(ARGS)
  
 ddsreportSubscriber: ./org/cloudsimplus/examples/dds_classes/ddsreport/ddsreportSubscriber.class
-	$(JAVA_PATH)  $(RTI_JAVA_OPTION) -classpath ".;$(RTI_CLASSPATH)" org.cloudsimplus.examples.dds_classes.ddsreport.ddsreportSubscriber $(ARGS)
+	$(JAVA_PATH)  $(RTI_JAVA_OPTION) -classpath ".;$(RTI_CLASSPATH)" org.cloudsimplus.examples.dds_classes.ddsreport.DDSReportSubscriber $(ARGS)

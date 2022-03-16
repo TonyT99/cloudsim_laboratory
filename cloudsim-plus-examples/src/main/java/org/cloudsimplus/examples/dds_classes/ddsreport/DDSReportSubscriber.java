@@ -10,7 +10,7 @@
 * to use the software.
 */
 
-package org.cloudsimplus.examples.dds_classes.datacentersimple;
+package org.cloudsimplus.examples.dds_classes.ddsreport;
 
 import java.util.Objects;
 
@@ -35,11 +35,11 @@ import com.rti.dds.topic.Topic;
 /**
 * Simple example showing all Connext code in one place for readability.
 */
-public class datacentersimpleSubscriber extends Application implements AutoCloseable {
+public class DDSReportSubscriber extends Application implements AutoCloseable {
 
     private DomainParticipant participant = null; // Usually one per application
-    private datacentersimpleDataReader reader = null;
-    private final datacentersimpleSeq dataSeq = new datacentersimpleSeq();
+    private DDSReportDataReader reader = null;
+    private final DDSReportSeq dataSeq = new DDSReportSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
 
     private int processData() {
@@ -88,20 +88,20 @@ public class datacentersimpleSubscriber extends Application implements AutoClose
                 StatusKind.STATUS_MASK_NONE));
 
         // Register the datatype to use when creating the Topic
-        String typeName = datacentersimpleTypeSupport.get_type_name();
-        datacentersimpleTypeSupport.register_type(participant, typeName);
+        String typeName = DDSReportTypeSupport.get_type_name();
+        DDSReportTypeSupport.register_type(participant, typeName);
 
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example datacentersimple",
+                "Example ddsreport",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataReader reads data on "Example datacentersimple" Topic
-        reader = (datacentersimpleDataReader) Objects.requireNonNull(
+        // This DataReader reads data on "Example ddsreport" Topic
+        reader = (DDSReportDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,
                 Subscriber.DATAREADER_QOS_DEFAULT,
@@ -152,7 +152,7 @@ public class datacentersimpleSubscriber extends Application implements AutoClose
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // subscriberApplication.close() automatically called
-        try (datacentersimpleSubscriber subscriberApplication = new datacentersimpleSubscriber()) {
+        try (DDSReportSubscriber subscriberApplication = new DDSReportSubscriber()) {
             subscriberApplication.parseArguments(args);
             subscriberApplication.addShutdownHook();
             subscriberApplication.runApplication();

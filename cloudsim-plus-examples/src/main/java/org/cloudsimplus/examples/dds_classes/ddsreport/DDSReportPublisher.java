@@ -10,7 +10,7 @@
 * to use the software.
 */
 
-package org.cloudsimplus.examples.dds_classes.datacentersimple;
+package org.cloudsimplus.examples.dds_classes.ddsreport;
 
 import java.util.Objects;
 
@@ -24,7 +24,7 @@ import com.rti.dds.topic.Topic;
 /**
 * Simple example showing all Connext code in one place for readability.
 */
-public class datacentersimplePublisher extends Application implements AutoCloseable {
+public class DDSReportPublisher extends Application implements AutoCloseable {
 
     // Usually one per application
     private DomainParticipant participant = null;
@@ -46,20 +46,20 @@ public class datacentersimplePublisher extends Application implements AutoClosea
                 StatusKind.STATUS_MASK_NONE));
 
         // Register the datatype to use when creating the Topic
-        String typeName = datacentersimpleTypeSupport.get_type_name();
-        datacentersimpleTypeSupport.register_type(participant, typeName);
+        String typeName = DDSReportTypeSupport.get_type_name();
+        DDSReportTypeSupport.register_type(participant, typeName);
 
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example datacentersimple",
+                "Example ddsreport",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataWriter writes data on "Example datacentersimple" Topic
-        datacentersimpleDataWriter writer = (datacentersimpleDataWriter) Objects.requireNonNull(
+        // This DataWriter writes data on "Example ddsreport" Topic
+        DDSReportDataWriter writer = (DDSReportDataWriter) Objects.requireNonNull(
             publisher.create_datawriter(
                 topic,
                 Publisher.DATAWRITER_QOS_DEFAULT,
@@ -67,16 +67,18 @@ public class datacentersimplePublisher extends Application implements AutoClosea
                 StatusKind.STATUS_MASK_NONE));
 
         // Create data sample for writing
-        datacentersimple data = new datacentersimple();
+        DDSReport data = new DDSReport();
 
         for (int samplesWritten = 0; !isShutdownRequested()
         && samplesWritten < getMaxSampleCount(); samplesWritten++) {
 
             // Modify the data to be written here
-            data.id = samplesWritten;
-            data.timestampOfReport = samplesWritten;
+            data.timestamp = samplesWritten;
+            data.VMnumber = samplesWritten;
+            data.hostNumber = samplesWritten;
+            data.DataCenterNumber = samplesWritten;
 
-            System.out.println("Writing datacentersimple, count " + samplesWritten);
+            System.out.println("Writing ddsreport, count " + samplesWritten);
 
             writer.write(data, InstanceHandle_t.HANDLE_NIL);
             try {
@@ -103,7 +105,7 @@ public class datacentersimplePublisher extends Application implements AutoClosea
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // publisherApplication.close() automatically called
-        try (datacentersimplePublisher publisherApplication = new datacentersimplePublisher()) {
+        try (DDSReportPublisher publisherApplication = new DDSReportPublisher()) {
             publisherApplication.parseArguments(args);
             publisherApplication.addShutdownHook();
             publisherApplication.runApplication();

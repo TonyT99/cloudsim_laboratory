@@ -1,3 +1,4 @@
+
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
@@ -8,7 +9,7 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
 
-package org.cloudsimplus.examples.dds_classes.ddsreport;
+package org.cloudsimplus.examples.dds_classes.datacentersimple;
 
 import com.rti.dds.cdr.CdrEncapsulation;
 import com.rti.dds.cdr.CdrInputStream;
@@ -20,6 +21,7 @@ import com.rti.dds.publication.DataWriter;
 import com.rti.dds.publication.DataWriterListener;
 import com.rti.dds.subscription.DataReader;
 import com.rti.dds.subscription.DataReaderListener;
+import com.rti.dds.topic.KeyHash_t;
 import com.rti.dds.topic.DefaultEndpointData;
 import com.rti.dds.topic.TypeSupportImpl;
 import com.rti.dds.topic.TypeSupportType;
@@ -34,19 +36,19 @@ import com.rti.dds.domain.DomainParticipant;
 
 /**
 * A collection of useful methods for dealing with objects of type
-* ddsreport
+* datacentersimple
 */
 
-public class ddsreportTypeSupport extends TypeSupportImpl {
+public class DatacenterSimpleTypeSupport extends TypeSupportImpl {
     // -----------------------------------------------------------------------
     // Private Fields
     // -----------------------------------------------------------------------
 
-    private static final java.lang.String TYPE_NAME = "ddsreport";
+    private static final java.lang.String TYPE_NAME = "datacentersimple";
 
     private static final char[] PLUGIN_VERSION = {2, 0, 0, 0};
-    private static final ddsreportTypeSupport _singleton
-    = new ddsreportTypeSupport();
+    private static final DatacenterSimpleTypeSupport _singleton
+    = new DatacenterSimpleTypeSupport();
 
     // -----------------------------------------------------------------------
     // Public Methods
@@ -75,21 +77,21 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     * They should be used directly or modified only by advanced users and are
     * subject to change in future versions of RTI Connext.
     */
-    public static ddsreportTypeSupport get_instance() {
+    public static DatacenterSimpleTypeSupport get_instance() {
         return _singleton;
     }
 
-    public static ddsreportTypeSupport getInstance() {
+    public static DatacenterSimpleTypeSupport getInstance() {
         return get_instance();
     }
 
     public static TypeCode getTypeCode(){
-        return ddsreportTypeCode.VALUE;
+        return DatacenterSimpleTypeCode.VALUE;
     }
 
     @Override
     public java.lang.Object create_data() {
-        return ddsreport.create();
+        return DatacenterSimple.create();
     }
 
     @Override
@@ -98,7 +100,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     }
     @Override
     public java.lang.Object create_key() {
-        return new ddsreport();
+        return new DatacenterSimple();
     }
 
     @Override
@@ -108,7 +110,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
 
     @Override
     public java.lang.Class<?> get_type() {
-        return ddsreport.class;
+        return DatacenterSimple.class;
     }
 
     /**
@@ -121,14 +123,14 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     * @exception NullPointerException If <code>destination</code> or
     * <code>source</code> is null.
     * @exception ClassCastException If either <code>destination</code> or
-    * <code>this</code> is not a <code>ddsreport</code>
+    * <code>this</code> is not a <code>datacentersimple</code>
     * type.
     */
     @Override
     public java.lang.Object copy_data(java.lang.Object destination, java.lang.Object source) {
 
-        ddsreport typedDst = (ddsreport) destination;
-        ddsreport typedSrc = (ddsreport) source;
+        DatacenterSimple typedDst = (DatacenterSimple) destination;
+        DatacenterSimple typedSrc = (DatacenterSimple) source;
 
         return typedDst.copy_from(typedSrc);
 
@@ -161,8 +163,6 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment);
         }
 
-        currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         if (include_encapsulation) {
@@ -200,8 +200,6 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
 
         currentAlignment +=_cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         currentAlignment +=_cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment +=_cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment +=_cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
 
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
@@ -221,7 +219,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             final_encapsulation_id,
             ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY);
         boolean xcdr1 = (encapsulation_id <= CdrEncapsulation.CDR_ENCAPSULATION_ID_PL_CDR_LE);
-        ddsreport typedSrc = (ddsreport) sample;
+        DatacenterSimple typedSrc = (DatacenterSimple) sample;
         DefaultEndpointData epd = ((DefaultEndpointData) endpoint_data) ;
         long origAlignment = currentAlignment;
         long encapsulation_size = currentAlignment;
@@ -245,10 +243,6 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             //DHeader
             currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment);
         }
-
-        currentAlignment  +=  _cdrPrimitiveType.getIntMaxSizeSerialized(epd.getAlignment(currentAlignment));
-
-        currentAlignment  +=  _cdrPrimitiveType.getIntMaxSizeSerialized(epd.getAlignment(currentAlignment));
 
         currentAlignment  +=  _cdrPrimitiveType.getIntMaxSizeSerialized(epd.getAlignment(currentAlignment));
 
@@ -287,8 +281,12 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             origAlignment = 0;
         }
 
-        currentAlignment += get_serialized_sample_max_size(
-            endpoint_data,false,final_encapsulation_id,currentAlignment);
+        if (!xcdr1) {
+            //DHeader
+            currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment);
+        }
+
+        currentAlignment +=  _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -328,9 +326,6 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
         }
 
         currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
-        currentAlignment += _cdrPrimitiveType.getIntMaxSizeSerialized(currentAlignment) ;
         if (include_encapsulation) {
             currentAlignment += encapsulation_size;
         }
@@ -360,12 +355,10 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             if (!inBaseClass_tmp && !xcdr1) {
                 dheaderPosition=dst.writeDHeader();
             }
-            ddsreport typedSrc = (ddsreport) src;
+            DatacenterSimple typedSrc = (DatacenterSimple) src;
 
-            dst.writeInt(typedSrc.timestamp);
-            dst.writeInt(typedSrc.VMnumber);
-            dst.writeInt(typedSrc.hostNumber);
-            dst.writeInt(typedSrc.DataCenterNumber);
+            dst.writeInt(typedSrc.id);
+            dst.writeInt(typedSrc.timestampOfReport);
             if(!xcdr1){
                 if (dheaderPosition != -1) {
                     dst.setDHeader(dheaderPosition);
@@ -382,7 +375,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        ddsreport src)
+        DatacenterSimple src)
     {
         return super.serialize_to_cdr_buffer(buffer,length,src);
     }
@@ -390,7 +383,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        ddsreport src,
+        DatacenterSimple src,
         short representation)
     {
         return super.serialize_to_cdr_buffer(
@@ -410,6 +403,9 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
         java.lang.Object endpoint_plugin_qos)
     {
         int position = 0;
+        long memberId = 0;
+        int memberLengthPosition = 0;
+        int dheaderPosition = -1;
         boolean inBaseClass_tmp = false;
         inBaseClass_tmp =  dst.inBaseClass;
         dst.inBaseClass = false;
@@ -424,10 +420,21 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
         if (serialize_key) {
             boolean xcdr1 = (final_encapsulation_id <= CdrEncapsulation.CDR_ENCAPSULATION_ID_PL_CDR_LE)? true: false;
 
-            ddsreport typedSrc = (ddsreport) src;
+            if (!inBaseClass_tmp && !xcdr1) {
+                dheaderPosition=dst.writeDHeader();
+            }
+            DatacenterSimple typedSrc = (DatacenterSimple) src;
             dst.inBaseClass = false;
-            serialize(endpoint_data, src, dst, false, final_encapsulation_id, true, endpoint_plugin_qos);
 
+            boolean needExtendedId;
+            dst.writeInt(typedSrc.id);
+
+            if(!xcdr1){
+                if (dheaderPosition != -1) {
+                    dst.setDHeader(dheaderPosition);
+                }
+
+            }
         }
 
         if (serialize_encapsulation) {
@@ -475,12 +482,9 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             }
 
             if (serialize_key) {
-                ddsreport typedSrc = (ddsreport) src;
+                DatacenterSimple typedSrc = (DatacenterSimple) src;
                 dst.inBaseClass = false;
-                dst.writeInt(typedSrc.timestamp);
-                dst.writeInt(typedSrc.VMnumber);
-                dst.writeInt(typedSrc.hostNumber);
-                dst.writeInt(typedSrc.DataCenterNumber);
+                dst.writeInt(typedSrc.id);
             }
 
             if (serialize_encapsulation) {
@@ -518,7 +522,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            ddsreport typedDst = (ddsreport) dst;
+            DatacenterSimple typedDst = (DatacenterSimple) dst;
             typedDst.clear();
             int DHtmpPosition = 0;
             int DHtmpSize = 0;
@@ -531,10 +535,8 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             }
 
             try{
-                typedDst.timestamp = src.readInt();
-                typedDst.VMnumber = src.readInt();
-                typedDst.hostNumber = src.readInt();
-                typedDst.DataCenterNumber = src.readInt();
+                typedDst.id = src.readInt();
+                typedDst.timestampOfReport = src.readInt();
 
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -556,7 +558,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     }
 
     public void deserialize_from_cdr_buffer(
-        ddsreport dst,
+        DatacenterSimple dst,
         byte[] buffer,
         long length)
     {
@@ -564,14 +566,14 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     }
 
     public java.lang.String data_to_string(
-        ddsreport sample,
+        DatacenterSimple sample,
         PrintFormatProperty property)
     {
         return super.data_to_string(sample, property);
     }
 
     public java.lang.String data_to_string(
-        ddsreport sample)
+        DatacenterSimple sample)
     {
         return super.data_to_string(sample);
     }
@@ -605,9 +607,21 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            ddsreport typedDst = (ddsreport) dst;
+            int DHtmpPosition = 0;
+            int DHtmpSize = 0;
+            long DHtmpLength = 0;
+            if (!xcdr1 && !inBaseClass_tmp) {
+                DHtmpLength = src.readInt();
+                DHtmpPosition = buffer.currentPosition();
+                DHtmpSize = buffer.getDesBufferSize();
+                buffer.setDesBufferSize((int)(DHtmpPosition + DHtmpLength));
+            }
+            DatacenterSimple typedDst = (DatacenterSimple) dst;
 
-            deserialize_sample(endpoint_data, dst, src, false, true, endpoint_plugin_qos);
+            typedDst.id = src.readInt();
+            if (!xcdr1 && !inBaseClass_tmp ) {
+                buffer.restore(DHtmpSize, (int) (DHtmpPosition + DHtmpLength));
+            }
         }
         if (deserialize_encapsulation) {
             src.restoreAlignment(position);
@@ -660,10 +674,6 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
 
                 src.skipInt();
 
-                src.skipInt();
-
-                src.skipInt();
-
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >=
                 CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
@@ -710,10 +720,32 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            ddsreport typedDst = (ddsreport) sample;
-            deserialize_sample(
-                endpoint_data, sample, src, false,
-                true, endpoint_plugin_qos);
+            DatacenterSimple typedDst = (DatacenterSimple) sample;
+            int DHtmpPosition = 0;
+            int DHtmpSize = 0;
+            long DHtmpLength = 0;
+            if (!xcdr1 && !inBaseClass_tmp) {
+                DHtmpLength = src.readInt();
+                DHtmpPosition = buffer.currentPosition();
+                DHtmpSize = buffer.getDesBufferSize();
+                buffer.setDesBufferSize((int)(DHtmpPosition + DHtmpLength));
+            }
+            try {
+
+                typedDst.id = src.readInt();
+
+                src.skipInt();
+            } catch (IllegalCdrStateException stateEx) {
+                if (src.available() >=
+                CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {
+                    throw new IllegalCdrStateException(
+                        "Error skipping sample! Remainder:" + src.available()
+                        + "\nException caused by: " + stateEx.getMessage());
+                }
+            }
+            if (!xcdr1 && !inBaseClass_tmp ) {
+                buffer.restore(DHtmpSize, (int) (DHtmpPosition + DHtmpLength));
+            }
 
         }
 
@@ -722,6 +754,96 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
         }
 
         return sample;
+    }
+
+    /* Fill in the key fields of the given instance sample based on the key.
+    */
+    public void key_to_instance(java.lang.Object endpoint_data,
+    java.lang.Object instance,
+    java.lang.Object key) {
+        DatacenterSimple typedDst
+        = (DatacenterSimple) instance;
+        DatacenterSimple typedSrc
+        = (DatacenterSimple) key;
+        typedDst.id = typedSrc.id;
+
+    }
+
+    /* Fill in the given key based on the key fields of the given instance
+    * sample.
+    */
+    public void instance_to_key(java.lang.Object endpoint_data,
+    java.lang.Object key,
+    java.lang.Object instance) {
+        DatacenterSimple typedDst
+        = (DatacenterSimple)key;
+        DatacenterSimple typedSrc
+        = (DatacenterSimple) instance;
+        typedDst.id = typedSrc.id;
+
+    }
+
+    @Override
+    public void serialized_sample_to_keyhash(
+        java.lang.Object endpoint_data,
+        CdrInputStream src,
+        KeyHash_t keyhash,
+        boolean include_encapsulation,
+        java.lang.Object endpoint_plugin_qos)
+    {
+        int position = 0;
+        CdrBuffer buffer = null;
+        boolean inBaseClass_tmp = false;
+        inBaseClass_tmp =  src.inBaseClass;
+        src.inBaseClass = false;
+
+        DefaultEndpointData endpointData = (DefaultEndpointData) endpoint_data;
+        java.lang.Object sample = null;
+
+        sample = endpointData.get_sample();
+
+        if (sample == null) {
+            throw new RETCODE_ERROR("Missing intermediate sample");
+        }
+
+        DatacenterSimple typedDst = (DatacenterSimple) sample;
+
+        if (include_encapsulation) {
+            src.deserializeAndSetCdrEncapsulation();
+
+            position = src.resetAlignment();
+        }
+        short encapsulation_id = src.getEncapsulationKind();
+        boolean xcdr1 = (encapsulation_id <= CdrEncapsulation.CDR_ENCAPSULATION_ID_PL_CDR_LE)? true: false;
+        if(!xcdr1){
+            buffer = src.getBuffer();
+        }
+        typedDst.clear();
+        int DHtmpPosition = 0;
+        int DHtmpSize = 0;
+        long DHtmpLength = 0;
+        if (!xcdr1 && !inBaseClass_tmp) {
+            DHtmpLength = src.readInt();
+            DHtmpPosition = buffer.currentPosition();
+            DHtmpSize = buffer.getDesBufferSize();
+            buffer.setDesBufferSize((int)(DHtmpPosition + DHtmpLength));
+        }
+
+        typedDst.id = src.readInt();
+
+        if (!xcdr1 && !inBaseClass_tmp ) {
+            buffer.restore(DHtmpSize, (int) (DHtmpPosition + DHtmpLength));
+        }
+
+        if (include_encapsulation) {
+            src.restoreAlignment(position);
+        }
+
+        instance_to_keyhash(
+            endpoint_data,
+            keyhash,
+            sample,
+            src.getEncapsulationKind());
     }
 
     // -----------------------------------------------------------------------
@@ -764,7 +886,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     protected DataWriter create_datawriter(long native_writer,
     DataWriterListener listener,
     int mask) {
-        return new ddsreportDataWriter (native_writer, listener, mask, this);
+        return new DatacenterSimpleDataWriter(native_writer, listener, mask, this);
     }
 
     @Override
@@ -772,7 +894,7 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     DataReaderListener listener,
     int mask) {
 
-        return new ddsreportDataReader(native_reader, listener, mask, this);
+        return new DatacenterSimpleDataReader(native_reader, listener, mask, this);
 
     }
 
@@ -780,19 +902,19 @@ public class ddsreportTypeSupport extends TypeSupportImpl {
     // Constructor
     // -----------------------------------------------------------------------
 
-    protected ddsreportTypeSupport() {
+    protected DatacenterSimpleTypeSupport() {
 
         /* If the user data type supports keys, then the second argument
         to the constructor below should be true.  Otherwise it should
         be false. */
 
-        super(TYPE_NAME, false, ddsreportTypeCode.VALUE, ddsreport.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME,true, DatacenterSimpleTypeCode.VALUE, DatacenterSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
 
     }
 
-    protected ddsreportTypeSupport (boolean enableKeySupport) {
+    protected DatacenterSimpleTypeSupport(boolean enableKeySupport) {
 
-        super(TYPE_NAME, enableKeySupport, ddsreportTypeCode.VALUE, ddsreport.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME, enableKeySupport, DatacenterSimpleTypeCode.VALUE, DatacenterSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
     }
 }
 

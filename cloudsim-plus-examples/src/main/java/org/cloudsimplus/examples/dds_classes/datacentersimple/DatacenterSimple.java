@@ -16,15 +16,15 @@ import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class datacentersimple   implements Copyable, Serializable{
+public class DatacenterSimple implements Copyable, Serializable{
 
     public int id = (int)0;
     public int timestampOfReport = (int)0;
 
-    public datacentersimple() {
+    public DatacenterSimple() {
 
     }
-    public datacentersimple (datacentersimple other) {
+    public DatacenterSimple(DatacenterSimple other) {
 
         this();
         copy_from(other);
@@ -32,8 +32,8 @@ public class datacentersimple   implements Copyable, Serializable{
 
     public static java.lang.Object create() {
 
-        datacentersimple self;
-        self = new  datacentersimple();
+        DatacenterSimple self;
+        self = new DatacenterSimple();
         self.clear();
         return self;
 
@@ -56,7 +56,7 @@ public class datacentersimple   implements Copyable, Serializable{
             return false;
         }
 
-        datacentersimple otherObj = (datacentersimple)o;
+        DatacenterSimple otherObj = (DatacenterSimple)o;
 
         if(this.id != otherObj.id) {
             return false;
@@ -92,8 +92,8 @@ public class datacentersimple   implements Copyable, Serializable{
     */
     public java.lang.Object copy_from(java.lang.Object src) {
 
-        datacentersimple typedSrc = (datacentersimple) src;
-        datacentersimple typedDst = this;
+        DatacenterSimple typedSrc = (DatacenterSimple) src;
+        DatacenterSimple typedDst = this;
 
         typedDst.id = typedSrc.id;
         typedDst.timestampOfReport = typedSrc.timestampOfReport;

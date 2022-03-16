@@ -9,7 +9,7 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
 
-package org.cloudsimplus.examples.dds_classes.datacentersimple;
+package org.cloudsimplus.examples.dds_classes.ddsreport;
 
 import java.util.Collection;
 
@@ -18,9 +18,9 @@ import com.rti.dds.util.Sequence;
 import com.rti.dds.util.LoanableSequence;
 
 /**
-* A sequence of datacentersimple instances.
+* A sequence of ddsreport instances.
 */
-public final class datacentersimpleSeq extends LoanableSequence implements Copyable {
+public final class DDSReportSeq extends LoanableSequence implements Copyable {
     // -----------------------------------------------------------------------
     // Package Fields
     // -----------------------------------------------------------------------
@@ -38,20 +38,20 @@ public final class datacentersimpleSeq extends LoanableSequence implements Copya
 
     // --- Constructors: -----------------------------------------------------
 
-    public datacentersimpleSeq() {
-        super(datacentersimple.class);
+    public DDSReportSeq() {
+        super(DDSReport.class);
     }
 
-    public datacentersimpleSeq (int initialMaximum) {
-        super(datacentersimple.class, initialMaximum);
+    public DDSReportSeq(int initialMaximum) {
+        super(DDSReport.class, initialMaximum);
     }
 
-    public datacentersimpleSeq (Collection<?> elements) {
-        super(datacentersimple.class, elements);
+    public DDSReportSeq(Collection<?> elements) {
+        super(DDSReport.class, elements);
     }
 
-    public  datacentersimple get(int index) {
-        return (datacentersimple) super.get(index);
+    public DDSReport get(int index) {
+        return (DDSReport) super.get(index);
     }
 
     // --- From Copyable: ----------------------------------------------------
@@ -99,19 +99,19 @@ public final class datacentersimpleSeq extends LoanableSequence implements Copya
                 // check to see if our entry is null, if it is, a new instance has to be allocated
                 if (get(i) == null){
 
-                    set(i, datacentersimple.create());
+                    set(i, DDSReport.create());
                 }
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }
         }
 
-        // copy 'new' datacentersimple objects (beyond the original size of this object)
+        // copy 'new' ddsreport objects (beyond the original size of this object)
         for(int i = origSize; i < srcSize; i++){
             if (typedSrc.get(i) == null) {
                 add(null);
             } else {
                 // NOTE: we need to create a new object here to hold the copy
-                add(datacentersimple.create());
+                add(DDSReport.create());
                 // we need to do a set here since enums aren't truely Copyable
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }
