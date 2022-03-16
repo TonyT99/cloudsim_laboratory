@@ -1,7 +1,7 @@
 /*  This file was automatically generated.
      Modify the type definition to fit your needs
 */
-struct datacentersimple {
+struct DatacenterSimple {
     long id; //@key
     long timestampOfReport; //@foreign-key
 };
