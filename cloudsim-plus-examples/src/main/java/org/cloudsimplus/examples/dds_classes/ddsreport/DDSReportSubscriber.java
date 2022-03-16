@@ -41,6 +41,7 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
     private DDSReportDataReader reader = null;
     private final DDSReportSeq dataSeq = new DDSReportSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
+    private String topicName;
 
     private int processData() {
         int samplesRead = 0;
@@ -71,6 +72,10 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
         return samplesRead;
     }
 
+    public DDSReportSubscriber(String topicName) {
+        this.topicName = topicName;
+
+    }
     private void runApplication() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
@@ -94,7 +99,7 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example ddsreport",
+                topicName,
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
@@ -152,7 +157,7 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // subscriberApplication.close() automatically called
-        try (DDSReportSubscriber subscriberApplication = new DDSReportSubscriber()) {
+        try (DDSReportSubscriber subscriberApplication = new DDSReportSubscriber(args[0])) {
             subscriberApplication.parseArguments(args);
             subscriberApplication.addShutdownHook();
             subscriberApplication.runApplication();

@@ -363,9 +363,9 @@ public class DDSReportTypeSupport extends TypeSupportImpl {
             DDSReport typedSrc = (DDSReport) src;
 
             dst.writeInt(typedSrc.timestamp);
-            dst.writeInt(typedSrc.VMnumber);
+            dst.writeInt(typedSrc.vmNumber);
             dst.writeInt(typedSrc.hostNumber);
-            dst.writeInt(typedSrc.DataCenterNumber);
+            dst.writeInt(typedSrc.dataCenterNumber);
             if(!xcdr1){
                 if (dheaderPosition != -1) {
                     dst.setDHeader(dheaderPosition);
@@ -478,9 +478,9 @@ public class DDSReportTypeSupport extends TypeSupportImpl {
                 DDSReport typedSrc = (DDSReport) src;
                 dst.inBaseClass = false;
                 dst.writeInt(typedSrc.timestamp);
-                dst.writeInt(typedSrc.VMnumber);
+                dst.writeInt(typedSrc.vmNumber);
                 dst.writeInt(typedSrc.hostNumber);
-                dst.writeInt(typedSrc.DataCenterNumber);
+                dst.writeInt(typedSrc.dataCenterNumber);
             }
 
             if (serialize_encapsulation) {
@@ -532,9 +532,9 @@ public class DDSReportTypeSupport extends TypeSupportImpl {
 
             try{
                 typedDst.timestamp = src.readInt();
-                typedDst.VMnumber = src.readInt();
+                typedDst.vmNumber = src.readInt();
                 typedDst.hostNumber = src.readInt();
-                typedDst.DataCenterNumber = src.readInt();
+                typedDst.dataCenterNumber = src.readInt();
 
             } catch (IllegalCdrStateException stateEx) {
                 if (src.available() >= CdrEncapsulation.CDR_ENCAPSULATION_PARAMETER_ID_ALIGNMENT) {

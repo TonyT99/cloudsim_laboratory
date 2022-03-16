@@ -74,9 +74,9 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
 
             // Modify the data to be written here
             data.timestamp = samplesWritten;
-            data.VMnumber = samplesWritten;
+            data.vmNumber = samplesWritten;
             data.hostNumber = samplesWritten;
-            data.DataCenterNumber = samplesWritten;
+            data.dataCenterNumber = samplesWritten;
 
             System.out.println("Writing ddsreport, count " + samplesWritten);
 

@@ -19,12 +19,19 @@ import com.rti.dds.cdr.CdrHelper;
 public class DDSReport implements Copyable, Serializable{
 
     public int timestamp = (int)0;
-    public int VMnumber = (int)0;
+    public int vmNumber = (int)0;
     public int hostNumber = (int)0;
-    public int DataCenterNumber = (int)0;
+    public int dataCenterNumber = (int)0;
 
     public DDSReport() {
 
+    }
+
+    public DDSReport(int id, int vms, int hosts, int datacenters) {
+        timestamp = id;
+        vmNumber = vms;
+        hostNumber = hosts;
+        dataCenterNumber = datacenters;
     }
     public DDSReport(DDSReport other) {
 
@@ -44,9 +51,9 @@ public class DDSReport implements Copyable, Serializable{
     public void clear() {
 
         timestamp = (int)0;
-        VMnumber = (int)0;
+        vmNumber = (int)0;
         hostNumber = (int)0;
-        DataCenterNumber = (int)0;
+        dataCenterNumber = (int)0;
     }
 
     @Override
@@ -65,13 +72,13 @@ public class DDSReport implements Copyable, Serializable{
         if(this.timestamp != otherObj.timestamp) {
             return false;
         }
-        if(this.VMnumber != otherObj.VMnumber) {
+        if(this.vmNumber != otherObj.vmNumber) {
             return false;
         }
         if(this.hostNumber != otherObj.hostNumber) {
             return false;
         }
-        if(this.DataCenterNumber != otherObj.DataCenterNumber) {
+        if(this.dataCenterNumber != otherObj.dataCenterNumber) {
             return false;
         }
 
@@ -82,9 +89,9 @@ public class DDSReport implements Copyable, Serializable{
     public int hashCode() {
         int __result = 0;
         __result += (int)timestamp;
-        __result += (int)VMnumber;
+        __result += (int)vmNumber;
         __result += (int)hostNumber;
-        __result += (int)DataCenterNumber;
+        __result += (int)dataCenterNumber;
         return __result;
     }
 
@@ -108,9 +115,9 @@ public class DDSReport implements Copyable, Serializable{
         DDSReport typedDst = this;
 
         typedDst.timestamp = typedSrc.timestamp;
-        typedDst.VMnumber = typedSrc.VMnumber;
+        typedDst.vmNumber = typedSrc.vmNumber;
         typedDst.hostNumber = typedSrc.hostNumber;
-        typedDst.DataCenterNumber = typedSrc.DataCenterNumber;
+        typedDst.dataCenterNumber = typedSrc.dataCenterNumber;
 
         return this;
     }
@@ -131,11 +138,11 @@ public class DDSReport implements Copyable, Serializable{
         CdrHelper.printIndent(strBuffer, indent+1);
         strBuffer.append("timestamp: ").append(this.timestamp).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
-        strBuffer.append("VMnumber: ").append(this.VMnumber).append("\n");
+        strBuffer.append("VMnumber: ").append(this.vmNumber).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
         strBuffer.append("hostNumber: ").append(this.hostNumber).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
-        strBuffer.append("DataCenterNumber: ").append(this.DataCenterNumber).append("\n");
+        strBuffer.append("DataCenterNumber: ").append(this.dataCenterNumber).append("\n");
 
         return strBuffer.toString();
     }
