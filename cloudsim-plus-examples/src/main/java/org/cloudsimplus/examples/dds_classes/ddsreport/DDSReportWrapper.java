@@ -15,64 +15,105 @@ public class DDSReportWrapper {
     int vmNumber; // The number of virtual machines in the DDS report.
     int hostNumber; // The number of hosts in the DDS report.
     int dataCenterNumber; // The number of datacenters in the DDS report.
-    DDSReport report; // The DDS report the class will wrap.
+    /*DDSReport report; // The DDS report the class will wrap.
     String typeName; // The datatype to use when creating the Topic.
     Topic topic; // A topic for the application.
     String topicName; // The name of the application's topic.
-    Publisher publisher; // A Publisher allows an application to create one or more DataWriters.
+    Publisher publisher; // A Publisher allows an application to create one or more DataWriters.*/
     DDSReportDataWriter writer; // Writes data
+    DDSReportPublisher dataPublisher;
 
-    DDSReportWrapper(int rwId, int vms, int hosts, int datacenters, String topicName) {
-        typeName = DDSReportTypeSupport.get_type_name();
+    public DDSReportWrapper(int rwId, int vms, int hosts, int datacenters, String topicName) {
+        //String typeName = DDSReportTypeSupport.get_type_name();
         id = rwId;
         vmNumber = vms;
         hostNumber = hosts;
         dataCenterNumber = datacenters;
-        this.topicName = topicName;
-        participant = Objects.requireNonNull(
+        dataPublisher = new DDSReportPublisher(rwId, vms, hosts, datacenters);
+        //this.topicName = topicName;
+        /*participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
                 0,
                 DomainParticipantFactory.PARTICIPANT_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
-        DDSReportTypeSupport.register_type(participant, typeName);
-        publisher = Objects.requireNonNull(
+
+        // A Publisher allows an application to create one or more DataWriters
+        Publisher publisher = Objects.requireNonNull(
             participant.create_publisher(
                 DomainParticipant.PUBLISHER_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
-        topic = Objects.requireNonNull(
+
+        // Register the datatype to use when creating the Topic
+        String typeName = DDSReportTypeSupport.get_type_name();
+        DDSReportTypeSupport.register_type(participant, typeName);
+
+        // Create a Topic with a name and a datatype
+        Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                topicName,
+                "testTopic",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
+
+        // This DataWriter writes data on "Example ddsreport" Topic
         writer = (DDSReportDataWriter) Objects.requireNonNull(
             publisher.create_datawriter(
                 topic,
                 Publisher.DATAWRITER_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
+
+        DDSReport data = new DDSReport();
+        for (int samplesWritten = 0; samplesWritten < 20; samplesWritten++) {
+
+            // Modify the data to be written here
+            data.timestamp = samplesWritten;
+            data.vmNumber = samplesWritten;
+            data.hostNumber = samplesWritten;
+            data.dataCenterNumber = samplesWritten;
+
+            System.out.println("Writing ddsreport, count " + samplesWritten);
+
+            writer.write(data, InstanceHandle_t.HANDLE_NIL);
+        }*/
     }
 
-    void publish() {
-        report = new DDSReport();
+    public void publish() {
+        String[] args = { String.valueOf(id), String.valueOf(vmNumber), String.valueOf(hostNumber), String.valueOf(dataCenterNumber) };
+        DDSReportPublisher.main(args);
+        /*DDSReport report = new DDSReport();
         // Modify the data to be written here
         report.timestamp = (short) id;
         report.vmNumber = vmNumber;
         report.hostNumber = hostNumber;
         report.dataCenterNumber = dataCenterNumber;
-        System.out.println("id of the report: " + id);
+        /*System.out.println("The id of the report: " + id);
+        System.out.println("The number of virtual machines: " + vmNumber);
+        System.out.println("The number of hosts: " + hostNumber);
+        System.out.println("The number of datacenters: " + dataCenterNumber);
         writer.write(report, InstanceHandle_t.HANDLE_NIL);
+        try {
+            final long sendPeriodMillis = 1000; // 1 second
+            Thread.sleep(sendPeriodMillis);
+        } catch (InterruptedException ix) {
+            System.err.println("INTERRUPTED");
+        }*/
     }
 
-    public class RWThread extends Thread {
-        String args[] = {topicName};
+    public class RWSubThread extends Thread {
+        String[] args = {};
         public void run() { DDSReportSubscriber.main(args); }
     }
     public void runSubscriber() {
-        RWThread thread = new RWThread();
+        RWSubThread thread = new RWSubThread();
         thread.start();
+    }
+
+    public class RWPubThread extends Thread {
+        String[] args = {};
+        public void run() { DDSReportPublisher.main(args); }
     }
 }

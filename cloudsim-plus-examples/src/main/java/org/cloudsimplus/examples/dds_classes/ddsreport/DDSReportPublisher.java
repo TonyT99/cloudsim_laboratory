@@ -28,7 +28,17 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
 
     // Usually one per application
     private DomainParticipant participant = null;
+    int id; // The id of the DDS report.
+    int vmNumber; // The number of virtual machines in the DDS report.
+    int hostNumber; // The number of hosts in the DDS report.
+    int dataCenterNumber; // The number of datacenters in the DDS report.
 
+    DDSReportPublisher(int id, int vmNumber, int hostNumber, int dataCenterNumber) {
+        this.id = id;
+        this.vmNumber = vmNumber;
+        this.hostNumber = hostNumber;
+        this.dataCenterNumber = dataCenterNumber;
+    }
     private void runApplication() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
@@ -52,7 +62,7 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example ddsreport",
+                "testTopic",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
@@ -69,16 +79,16 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
         // Create data sample for writing
         DDSReport data = new DDSReport();
 
-        for (int samplesWritten = 0; !isShutdownRequested()
-        && samplesWritten < getMaxSampleCount(); samplesWritten++) {
+        /*for (int samplesWritten = 0; !isShutdownRequested()
+        && samplesWritten < getMaxSampleCount(); samplesWritten++) {*/
 
             // Modify the data to be written here
-            data.timestamp = samplesWritten;
-            data.vmNumber = samplesWritten;
-            data.hostNumber = samplesWritten;
-            data.dataCenterNumber = samplesWritten;
+            data.timestamp = id;
+            data.vmNumber = vmNumber;
+            data.hostNumber = hostNumber;
+            data.dataCenterNumber = dataCenterNumber;
 
-            System.out.println("Writing ddsreport, count " + samplesWritten);
+            System.out.println("Writing ddsreport.");
 
             writer.write(data, InstanceHandle_t.HANDLE_NIL);
             try {
@@ -86,9 +96,9 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
                 Thread.sleep(sendPeriodMillis);
             } catch (InterruptedException ix) {
                 System.err.println("INTERRUPTED");
-                break;
+          //      break;
             }
-        }
+        //}
     }
 
     @Override
@@ -105,8 +115,8 @@ public class DDSReportPublisher extends Application implements AutoCloseable {
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // publisherApplication.close() automatically called
-        try (DDSReportPublisher publisherApplication = new DDSReportPublisher()) {
-            publisherApplication.parseArguments(args);
+        try (DDSReportPublisher publisherApplication = new DDSReportPublisher(Integer.parseInt(args[0]), Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]))) {
+            //publisherApplication.parseArguments(args);
             publisherApplication.addShutdownHook();
             publisherApplication.runApplication();
         }
