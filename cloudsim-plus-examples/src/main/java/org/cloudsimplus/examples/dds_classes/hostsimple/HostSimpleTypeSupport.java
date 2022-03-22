@@ -91,7 +91,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
 
     @Override
     public java.lang.Object create_data() {
-        return HostSimple.create();
+        return DdsHostSimple.create();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     }
     @Override
     public java.lang.Object create_key() {
-        return new HostSimple();
+        return new DdsHostSimple();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
 
     @Override
     public java.lang.Class<?> get_type() {
-        return HostSimple.class;
+        return DdsHostSimple.class;
     }
 
     /**
@@ -129,8 +129,8 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     @Override
     public java.lang.Object copy_data(java.lang.Object destination, java.lang.Object source) {
 
-        HostSimple typedDst = (HostSimple) destination;
-        HostSimple typedSrc = (HostSimple) source;
+        DdsHostSimple typedDst = (DdsHostSimple) destination;
+        DdsHostSimple typedSrc = (DdsHostSimple) source;
 
         return typedDst.copy_from(typedSrc);
 
@@ -227,7 +227,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             final_encapsulation_id,
             ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY);
         boolean xcdr1 = (encapsulation_id <= CdrEncapsulation.CDR_ENCAPSULATION_ID_PL_CDR_LE);
-        HostSimple typedSrc = (HostSimple) sample;
+        DdsHostSimple typedSrc = (DdsHostSimple) sample;
         DefaultEndpointData epd = ((DefaultEndpointData) endpoint_data) ;
         long origAlignment = currentAlignment;
         long encapsulation_size = currentAlignment;
@@ -371,7 +371,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             if (!inBaseClass_tmp && !xcdr1) {
                 dheaderPosition=dst.writeDHeader();
             }
-            HostSimple typedSrc = (HostSimple) src;
+            DdsHostSimple typedSrc = (DdsHostSimple) src;
 
             dst.writeShort(typedSrc.id);
             dst.writeShort(typedSrc.datacenterId);
@@ -395,7 +395,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        HostSimple src)
+        DdsHostSimple src)
     {
         return super.serialize_to_cdr_buffer(buffer,length,src);
     }
@@ -403,7 +403,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        HostSimple src,
+        DdsHostSimple src,
         short representation)
     {
         return super.serialize_to_cdr_buffer(
@@ -443,7 +443,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             if (!inBaseClass_tmp && !xcdr1) {
                 dheaderPosition=dst.writeDHeader();
             }
-            HostSimple typedSrc = (HostSimple) src;
+            DdsHostSimple typedSrc = (DdsHostSimple) src;
             dst.inBaseClass = false;
 
             boolean needExtendedId;
@@ -502,7 +502,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             }
 
             if (serialize_key) {
-                HostSimple typedSrc = (HostSimple) src;
+                DdsHostSimple typedSrc = (DdsHostSimple) src;
                 dst.inBaseClass = false;
                 dst.writeShort(typedSrc.id);
             }
@@ -542,7 +542,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            HostSimple typedDst = (HostSimple) dst;
+            DdsHostSimple typedDst = (DdsHostSimple) dst;
             typedDst.clear();
             int DHtmpPosition = 0;
             int DHtmpSize = 0;
@@ -582,7 +582,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     }
 
     public void deserialize_from_cdr_buffer(
-        HostSimple dst,
+        DdsHostSimple dst,
         byte[] buffer,
         long length)
     {
@@ -590,14 +590,14 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     }
 
     public java.lang.String data_to_string(
-        HostSimple sample,
+        DdsHostSimple sample,
         PrintFormatProperty property)
     {
         return super.data_to_string(sample, property);
     }
 
     public java.lang.String data_to_string(
-        HostSimple sample)
+        DdsHostSimple sample)
     {
         return super.data_to_string(sample);
     }
@@ -640,7 +640,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
                 DHtmpSize = buffer.getDesBufferSize();
                 buffer.setDesBufferSize((int)(DHtmpPosition + DHtmpLength));
             }
-            HostSimple typedDst = (HostSimple) dst;
+            DdsHostSimple typedDst = (DdsHostSimple) dst;
 
             typedDst.id = src.readShort();
             if (!xcdr1 && !inBaseClass_tmp ) {
@@ -752,7 +752,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            HostSimple typedDst = (HostSimple) sample;
+            DdsHostSimple typedDst = (DdsHostSimple) sample;
             int DHtmpPosition = 0;
             int DHtmpSize = 0;
             long DHtmpLength = 0;
@@ -801,10 +801,10 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     public void key_to_instance(java.lang.Object endpoint_data,
     java.lang.Object instance,
     java.lang.Object key) {
-        HostSimple typedDst
-        = (HostSimple) instance;
-        HostSimple typedSrc
-        = (HostSimple) key;
+        DdsHostSimple typedDst
+        = (DdsHostSimple) instance;
+        DdsHostSimple typedSrc
+        = (DdsHostSimple) key;
         typedDst.id = typedSrc.id;
 
     }
@@ -815,10 +815,10 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
     public void instance_to_key(java.lang.Object endpoint_data,
     java.lang.Object key,
     java.lang.Object instance) {
-        HostSimple typedDst
-        = (HostSimple)key;
-        HostSimple typedSrc
-        = (HostSimple) instance;
+        DdsHostSimple typedDst
+        = (DdsHostSimple)key;
+        DdsHostSimple typedSrc
+        = (DdsHostSimple) instance;
         typedDst.id = typedSrc.id;
 
     }
@@ -846,7 +846,7 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
             throw new RETCODE_ERROR("Missing intermediate sample");
         }
 
-        HostSimple typedDst = (HostSimple) sample;
+        DdsHostSimple typedDst = (DdsHostSimple) sample;
 
         if (include_encapsulation) {
             src.deserializeAndSetCdrEncapsulation();
@@ -948,13 +948,13 @@ public class HostSimpleTypeSupport extends TypeSupportImpl {
         to the constructor below should be true.  Otherwise it should
         be false. */
 
-        super(TYPE_NAME,true, HostSimpleTypeCode.VALUE, HostSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME,true, HostSimpleTypeCode.VALUE, DdsHostSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
 
     }
 
     protected HostSimpleTypeSupport (boolean enableKeySupport) {
 
-        super(TYPE_NAME, enableKeySupport, HostSimpleTypeCode.VALUE, HostSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME, enableKeySupport, HostSimpleTypeCode.VALUE, DdsHostSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
     }
 }
 

@@ -12,7 +12,7 @@ import java.util.Objects;
 public class HostSimpleWrapper {
     private DomainParticipant participant; // A means to start communicating in a domain.
     int id; // The id of the host.
-    HostSimple host; // The host the class will wrap.
+    DdsHostSimple host; // The host the class will wrap.
     String typeName; // The datatype to use when creating the Tpic.
     Topic topic; // A topic for the application.
     Publisher publisher; // A Publisher allows an application to create one or more DataWriters.
@@ -49,7 +49,7 @@ public class HostSimpleWrapper {
     }
 
     void publish() {
-        host = new HostSimple();
+        host = new DdsHostSimple();
         // Modify the data to be written here
         host.id = (short) id;
         //datacenter.pressure = pressure;

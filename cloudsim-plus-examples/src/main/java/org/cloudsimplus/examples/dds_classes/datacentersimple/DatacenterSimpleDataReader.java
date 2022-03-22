@@ -60,11 +60,11 @@ public class DatacenterSimpleDataReader extends DataReaderImpl {
         condition);
     }
 
-    public void read_next_sample(DatacenterSimple received_data, SampleInfo sample_info) {
+    public void read_next_sample(DdsDatacenterSimple received_data, SampleInfo sample_info) {
         read_next_sample_untyped(received_data, sample_info);
     }
 
-    public void take_next_sample(DatacenterSimple received_data, SampleInfo sample_info) {
+    public void take_next_sample(DdsDatacenterSimple received_data, SampleInfo sample_info) {
         take_next_sample_untyped(received_data, sample_info);
     }
 
@@ -138,11 +138,11 @@ public class DatacenterSimpleDataReader extends DataReaderImpl {
         return_loan_untyped(received_data, info_seq);
     }
 
-    public void get_key_value(DatacenterSimple key_holder, InstanceHandle_t handle){
+    public void get_key_value(DdsDatacenterSimple key_holder, InstanceHandle_t handle){
         get_key_value_untyped(key_holder, handle);
     }
 
-    public InstanceHandle_t lookup_instance(DatacenterSimple key_holder) {
+    public InstanceHandle_t lookup_instance(DdsDatacenterSimple key_holder) {
         return lookup_instance_untyped(key_holder);
     }
 

@@ -67,7 +67,7 @@ public class DatacenterSimplePublisher extends Application implements AutoClosea
                 StatusKind.STATUS_MASK_NONE));
 
         // Create data sample for writing
-        DatacenterSimple data = new DatacenterSimple();
+        DdsDatacenterSimple data = new DdsDatacenterSimple();
 
         for (int samplesWritten = 0; !isShutdownRequested()
         && samplesWritten < getMaxSampleCount(); samplesWritten++) {

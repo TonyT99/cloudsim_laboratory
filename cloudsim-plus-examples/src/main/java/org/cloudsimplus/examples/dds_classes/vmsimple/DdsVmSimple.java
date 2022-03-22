@@ -10,25 +10,27 @@ For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
 
-package org.cloudsimplus.examples.dds_classes.hostsimple;
+package org.cloudsimplus.examples.dds_classes.vmsimple;
 
 import com.rti.dds.infrastructure.Copyable;
 import java.io.Serializable;
 import com.rti.dds.cdr.CdrHelper;
 
-public class HostSimple   implements Copyable, Serializable{
+public class DdsVmSimple implements Copyable, Serializable{
 
     public short id = (short)0;
-    public short datacenterId = (short)0;
+    public short hostId = (short)0;
     public int timestampOfReport = (int)0;
+    public int mips = (int)0;
+    public int numberOfPEs = (int)0;
     public int ram = (int)0;
     public int bw = (int)0;
     public int size = (int)0;
 
-    public HostSimple() {
+    public DdsVmSimple() {
 
     }
-    public HostSimple (HostSimple other) {
+    public DdsVmSimple(DdsVmSimple other) {
 
         this();
         copy_from(other);
@@ -36,8 +38,8 @@ public class HostSimple   implements Copyable, Serializable{
 
     public static java.lang.Object create() {
 
-        HostSimple self;
-        self = new  HostSimple();
+        DdsVmSimple self;
+        self = new DdsVmSimple();
         self.clear();
         return self;
 
@@ -46,8 +48,10 @@ public class HostSimple   implements Copyable, Serializable{
     public void clear() {
 
         id = (short)0;
-        datacenterId = (short)0;
+        hostId = (short)0;
         timestampOfReport = (int)0;
+        mips = (int)0;
+        numberOfPEs = (int)0;
         ram = (int)0;
         bw = (int)0;
         size = (int)0;
@@ -64,15 +68,21 @@ public class HostSimple   implements Copyable, Serializable{
             return false;
         }
 
-        HostSimple otherObj = (HostSimple)o;
+        DdsVmSimple otherObj = (DdsVmSimple)o;
 
         if(this.id != otherObj.id) {
             return false;
         }
-        if(this.datacenterId != otherObj.datacenterId) {
+        if(this.hostId != otherObj.hostId) {
             return false;
         }
         if(this.timestampOfReport != otherObj.timestampOfReport) {
+            return false;
+        }
+        if(this.mips != otherObj.mips) {
+            return false;
+        }
+        if(this.numberOfPEs != otherObj.numberOfPEs) {
             return false;
         }
         if(this.ram != otherObj.ram) {
@@ -92,8 +102,10 @@ public class HostSimple   implements Copyable, Serializable{
     public int hashCode() {
         int __result = 0;
         __result += (int)id;
-        __result += (int)datacenterId;
+        __result += (int)hostId;
         __result += (int)timestampOfReport;
+        __result += (int)mips;
+        __result += (int)numberOfPEs;
         __result += (int)ram;
         __result += (int)bw;
         __result += (int)size;
@@ -103,7 +115,7 @@ public class HostSimple   implements Copyable, Serializable{
     /**
     * This is the implementation of the <code>Copyable</code> interface.
     * This method will perform a deep copy of <code>src</code>
-    * This method could be placed into <code>HostSimpleTypeSupport</code>
+    * This method could be placed into <code>VmSimpleTypeSupport</code>
     * rather than here by using the <code>-noCopyable</code> option
     * to rtiddsgen.
     *
@@ -116,12 +128,14 @@ public class HostSimple   implements Copyable, Serializable{
     */
     public java.lang.Object copy_from(java.lang.Object src) {
 
-        HostSimple typedSrc = (HostSimple) src;
-        HostSimple typedDst = this;
+        DdsVmSimple typedSrc = (DdsVmSimple) src;
+        DdsVmSimple typedDst = this;
 
         typedDst.id = typedSrc.id;
-        typedDst.datacenterId = typedSrc.datacenterId;
+        typedDst.hostId = typedSrc.hostId;
         typedDst.timestampOfReport = typedSrc.timestampOfReport;
+        typedDst.mips = typedSrc.mips;
+        typedDst.numberOfPEs = typedSrc.numberOfPEs;
         typedDst.ram = typedSrc.ram;
         typedDst.bw = typedSrc.bw;
         typedDst.size = typedSrc.size;
@@ -145,9 +159,13 @@ public class HostSimple   implements Copyable, Serializable{
         CdrHelper.printIndent(strBuffer, indent+1);
         strBuffer.append("id: ").append(this.id).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
-        strBuffer.append("datacenterId: ").append(this.datacenterId).append("\n");
+        strBuffer.append("hostId: ").append(this.hostId).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
         strBuffer.append("timestampOfReport: ").append(this.timestampOfReport).append("\n");
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("mips: ").append(this.mips).append("\n");
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("numberOfPEs: ").append(this.numberOfPEs).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);
         strBuffer.append("ram: ").append(this.ram).append("\n");
         CdrHelper.printIndent(strBuffer, indent+1);

@@ -21,7 +21,7 @@ import com.rti.dds.infrastructure.StatusKind;
 import com.rti.dds.publication.Publisher;
 import com.rti.dds.topic.Topic;
 
-/** 
+/**
 * Simple example showing all Connext code in one place for readability.
 */
 public class HostSimplePublisher extends Application implements AutoCloseable {
@@ -67,7 +67,7 @@ public class HostSimplePublisher extends Application implements AutoCloseable {
                 StatusKind.STATUS_MASK_NONE));
 
         // Create data sample for writing
-        HostSimple data = new HostSimple();
+        DdsHostSimple data = new DdsHostSimple();
 
         for (int samplesWritten = 0; !isShutdownRequested()
         && samplesWritten < getMaxSampleCount(); samplesWritten++) {

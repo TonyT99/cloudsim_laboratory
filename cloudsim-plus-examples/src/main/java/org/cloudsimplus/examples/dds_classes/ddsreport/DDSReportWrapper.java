@@ -82,7 +82,8 @@ public class DDSReportWrapper {
     }
 
     public void publish() {
-        String[] args = { String.valueOf(id), String.valueOf(vmNumber), String.valueOf(hostNumber), String.valueOf(dataCenterNumber) };
+        String[] args = { String.valueOf(id), String.valueOf(vmNumber),
+            String.valueOf(hostNumber), String.valueOf(dataCenterNumber) };
         DDSReportPublisher.main(args);
         /*DDSReport report = new DDSReport();
         // Modify the data to be written here
@@ -105,7 +106,13 @@ public class DDSReportWrapper {
 
     public class RWSubThread extends Thread {
         String[] args = {};
-        public void run() { DDSReportSubscriber.main(args); }
+        public void run() {
+            try {
+                DDSReportSubscriber.main(args);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
     public void runSubscriber() {
         RWSubThread thread = new RWSubThread();

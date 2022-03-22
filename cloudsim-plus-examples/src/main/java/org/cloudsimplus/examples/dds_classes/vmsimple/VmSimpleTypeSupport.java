@@ -91,7 +91,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
 
     @Override
     public java.lang.Object create_data() {
-        return VmSimple.create();
+        return DdsVmSimple.create();
     }
 
     @Override
@@ -100,7 +100,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     }
     @Override
     public java.lang.Object create_key() {
-        return new VmSimple();
+        return new DdsVmSimple();
     }
 
     @Override
@@ -110,7 +110,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
 
     @Override
     public java.lang.Class<?> get_type() {
-        return VmSimple.class;
+        return DdsVmSimple.class;
     }
 
     /**
@@ -129,8 +129,8 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     @Override
     public java.lang.Object copy_data(java.lang.Object destination, java.lang.Object source) {
 
-        VmSimple typedDst = (VmSimple) destination;
-        VmSimple typedSrc = (VmSimple) source;
+        DdsVmSimple typedDst = (DdsVmSimple) destination;
+        DdsVmSimple typedSrc = (DdsVmSimple) source;
 
         return typedDst.copy_from(typedSrc);
 
@@ -231,7 +231,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             final_encapsulation_id,
             ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY);
         boolean xcdr1 = (encapsulation_id <= CdrEncapsulation.CDR_ENCAPSULATION_ID_PL_CDR_LE);
-        VmSimple typedSrc = (VmSimple) sample;
+        DdsVmSimple typedSrc = (DdsVmSimple) sample;
         DefaultEndpointData epd = ((DefaultEndpointData) endpoint_data) ;
         long origAlignment = currentAlignment;
         long encapsulation_size = currentAlignment;
@@ -379,7 +379,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             if (!inBaseClass_tmp && !xcdr1) {
                 dheaderPosition=dst.writeDHeader();
             }
-            VmSimple typedSrc = (VmSimple) src;
+            DdsVmSimple typedSrc = (DdsVmSimple) src;
 
             dst.writeShort(typedSrc.id);
             dst.writeShort(typedSrc.hostId);
@@ -405,7 +405,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        VmSimple src)
+        DdsVmSimple src)
     {
         return super.serialize_to_cdr_buffer(buffer,length,src);
     }
@@ -413,7 +413,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     public long serialize_to_cdr_buffer(
         byte[] buffer,
         long length,
-        VmSimple src,
+        DdsVmSimple src,
         short representation)
     {
         return super.serialize_to_cdr_buffer(
@@ -453,7 +453,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             if (!inBaseClass_tmp && !xcdr1) {
                 dheaderPosition=dst.writeDHeader();
             }
-            VmSimple typedSrc = (VmSimple) src;
+            DdsVmSimple typedSrc = (DdsVmSimple) src;
             dst.inBaseClass = false;
 
             boolean needExtendedId;
@@ -512,7 +512,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             }
 
             if (serialize_key) {
-                VmSimple typedSrc = (VmSimple) src;
+                DdsVmSimple typedSrc = (DdsVmSimple) src;
                 dst.inBaseClass = false;
                 dst.writeShort(typedSrc.id);
             }
@@ -552,7 +552,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            VmSimple typedDst = (VmSimple) dst;
+            DdsVmSimple typedDst = (DdsVmSimple) dst;
             typedDst.clear();
             int DHtmpPosition = 0;
             int DHtmpSize = 0;
@@ -594,7 +594,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     }
 
     public void deserialize_from_cdr_buffer(
-        VmSimple dst,
+        DdsVmSimple dst,
         byte[] buffer,
         long length)
     {
@@ -602,14 +602,14 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     }
 
     public java.lang.String data_to_string(
-        VmSimple sample,
+        DdsVmSimple sample,
         PrintFormatProperty property)
     {
         return super.data_to_string(sample, property);
     }
 
     public java.lang.String data_to_string(
-        VmSimple sample)
+        DdsVmSimple sample)
     {
         return super.data_to_string(sample);
     }
@@ -652,7 +652,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
                 DHtmpSize = buffer.getDesBufferSize();
                 buffer.setDesBufferSize((int)(DHtmpPosition + DHtmpLength));
             }
-            VmSimple typedDst = (VmSimple) dst;
+            DdsVmSimple typedDst = (DdsVmSimple) dst;
 
             typedDst.id = src.readShort();
             if (!xcdr1 && !inBaseClass_tmp ) {
@@ -768,7 +768,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             if(!xcdr1){
                 buffer = src.getBuffer();
             }
-            VmSimple typedDst = (VmSimple) sample;
+            DdsVmSimple typedDst = (DdsVmSimple) sample;
             int DHtmpPosition = 0;
             int DHtmpSize = 0;
             long DHtmpLength = 0;
@@ -821,10 +821,10 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     public void key_to_instance(java.lang.Object endpoint_data,
     java.lang.Object instance,
     java.lang.Object key) {
-        VmSimple typedDst
-        = (VmSimple) instance;
-        VmSimple typedSrc
-        = (VmSimple) key;
+        DdsVmSimple typedDst
+        = (DdsVmSimple) instance;
+        DdsVmSimple typedSrc
+        = (DdsVmSimple) key;
         typedDst.id = typedSrc.id;
 
     }
@@ -835,10 +835,10 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
     public void instance_to_key(java.lang.Object endpoint_data,
     java.lang.Object key,
     java.lang.Object instance) {
-        VmSimple typedDst
-        = (VmSimple)key;
-        VmSimple typedSrc
-        = (VmSimple) instance;
+        DdsVmSimple typedDst
+        = (DdsVmSimple)key;
+        DdsVmSimple typedSrc
+        = (DdsVmSimple) instance;
         typedDst.id = typedSrc.id;
 
     }
@@ -866,7 +866,7 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
             throw new RETCODE_ERROR("Missing intermediate sample");
         }
 
-        VmSimple typedDst = (VmSimple) sample;
+        DdsVmSimple typedDst = (DdsVmSimple) sample;
 
         if (include_encapsulation) {
             src.deserializeAndSetCdrEncapsulation();
@@ -968,13 +968,13 @@ public class VmSimpleTypeSupport extends TypeSupportImpl {
         to the constructor below should be true.  Otherwise it should
         be false. */
 
-        super(TYPE_NAME,true, VmSimpleTypeCode.VALUE, VmSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME,true, VmSimpleTypeCode.VALUE, DdsVmSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
 
     }
 
     protected VmSimpleTypeSupport (boolean enableKeySupport) {
 
-        super(TYPE_NAME, enableKeySupport, VmSimpleTypeCode.VALUE, VmSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
+        super(TYPE_NAME, enableKeySupport, VmSimpleTypeCode.VALUE, DdsVmSimple.class,TypeSupportType.TST_STRUCT, PLUGIN_VERSION);
     }
 }
 

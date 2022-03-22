@@ -2,7 +2,7 @@
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl 
+This file was generated from .idl
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
@@ -14,7 +14,6 @@ package org.cloudsimplus.examples.dds_classes.hostsimple;
 import java.util.Collection;
 
 import com.rti.dds.infrastructure.Copyable;
-import com.rti.dds.util.Enum;
 import com.rti.dds.util.Sequence;
 import com.rti.dds.util.LoanableSequence;
 
@@ -27,8 +26,8 @@ public final class HostSimpleSeq extends LoanableSequence implements Copyable {
     // -----------------------------------------------------------------------
 
     /**
-    * When a memory loan has been taken out in the lower layers of 
-    * RTI Data Distribution Service, store a pointer to the native sequence here. 
+    * When a memory loan has been taken out in the lower layers of
+    * RTI Data Distribution Service, store a pointer to the native sequence here.
     * That way, when we call finish(), we can give the memory back.
     */
     /*package*/ transient Sequence _loanedInfoSequence = null;
@@ -40,19 +39,19 @@ public final class HostSimpleSeq extends LoanableSequence implements Copyable {
     // --- Constructors: -----------------------------------------------------
 
     public HostSimpleSeq() {
-        super(HostSimple.class);
+        super(DdsHostSimple.class);
     }
 
     public HostSimpleSeq (int initialMaximum) {
-        super(HostSimple.class, initialMaximum);
+        super(DdsHostSimple.class, initialMaximum);
     }
 
     public HostSimpleSeq (Collection<?> elements) {
-        super(HostSimple.class, elements);
+        super(DdsHostSimple.class, elements);
     }
 
-    public  HostSimple get(int index) { 
-        return (HostSimple) super.get(index); 
+    public DdsHostSimple get(int index) {
+        return (DdsHostSimple) super.get(index);
     }
 
     // --- From Copyable: ----------------------------------------------------
@@ -62,11 +61,11 @@ public final class HostSimpleSeq extends LoanableSequence implements Copyable {
     * The result of this method is that both <code>this</code>
     * and <code>src</code> will be the same size and contain the
     * same data.
-    * 
+    *
     * @param src The Object which contains the data to be copied
     * @return <code>this</code>
     * @exception NullPointerException If <code>src</code> is null.
-    * @exception ClassCastException If <code>src</code> is not a 
+    * @exception ClassCastException If <code>src</code> is not a
     * <code>Sequence</code> OR if one of the objects contained in
     * the <code>Sequence</code> is not of the expected type.
     * @see com.rti.dds.infrastructure.Copyable#copy_from(java.lang.Object)
@@ -98,9 +97,9 @@ public final class HostSimpleSeq extends LoanableSequence implements Copyable {
                 set(i, null);
             } else {
                 // check to see if our entry is null, if it is, a new instance has to be allocated
-                if (get(i) == null){ 
+                if (get(i) == null){
 
-                    set(i, HostSimple.create());
+                    set(i, DdsHostSimple.create());
                 }
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }
@@ -112,7 +111,7 @@ public final class HostSimpleSeq extends LoanableSequence implements Copyable {
                 add(null);
             } else {
                 // NOTE: we need to create a new object here to hold the copy
-                add(HostSimple.create());
+                add(DdsHostSimple.create());
                 // we need to do a set here since enums aren't truely Copyable
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }

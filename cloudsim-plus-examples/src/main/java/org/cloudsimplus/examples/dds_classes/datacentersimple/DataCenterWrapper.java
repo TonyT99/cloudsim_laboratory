@@ -12,7 +12,7 @@ import java.util.Objects;
 public class DataCenterWrapper {
     private DomainParticipant participant; // A means to start communicating in a domain.
     int id; // The id of the datacenter.
-    DatacenterSimple datacenter; // The datacenter the class will wrap.
+    DdsDatacenterSimple datacenter; // The datacenter the class will wrap.
     String typeName; // The datatype to use when creating the Tpic.
     Topic topic; // A topic for the application.
     Publisher publisher; // A Publisher allows an application to create one or more DataWriters.
@@ -49,7 +49,7 @@ public class DataCenterWrapper {
     }
 
     void publish() {
-        datacenter = new DatacenterSimple();
+        datacenter = new DdsDatacenterSimple();
         // Modify the data to be written here
         datacenter.id = (short) id;
         //datacenter.pressure = pressure;

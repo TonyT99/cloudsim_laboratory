@@ -3,7 +3,7 @@
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl 
+This file was generated from .idl
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
@@ -28,79 +28,79 @@ public class HostSimpleDataWriter extends DataWriterImpl {
     // Public Methods
     // -----------------------------------------------------------------------
 
-    public InstanceHandle_t register_instance(HostSimple instance_data) {
+    public InstanceHandle_t register_instance(DdsHostSimple instance_data) {
         return register_instance_untyped(instance_data);
     }
 
-    public InstanceHandle_t register_instance_w_timestamp(HostSimple instance_data,
-    Time_t source_timestamp) {
+    public InstanceHandle_t register_instance_w_timestamp(DdsHostSimple instance_data,
+                                                          Time_t source_timestamp) {
         return register_instance_w_timestamp_untyped(
             instance_data, source_timestamp);
     }
 
-    public InstanceHandle_t register_instance_w_params(HostSimple instance_data,
-    WriteParams_t params) {
+    public InstanceHandle_t register_instance_w_params(DdsHostSimple instance_data,
+                                                       WriteParams_t params) {
         return register_instance_w_params_untyped(
             instance_data, params);
     }
 
-    public void unregister_instance(HostSimple instance_data,
-    InstanceHandle_t handle) {
+    public void unregister_instance(DdsHostSimple instance_data,
+                                    InstanceHandle_t handle) {
         unregister_instance_untyped(instance_data, handle);
     }
 
-    public void unregister_instance_w_timestamp(HostSimple instance_data,
-    InstanceHandle_t handle, Time_t source_timestamp) {
+    public void unregister_instance_w_timestamp(DdsHostSimple instance_data,
+                                                InstanceHandle_t handle, Time_t source_timestamp) {
 
         unregister_instance_w_timestamp_untyped(
             instance_data, handle, source_timestamp);
     }
 
-    public void unregister_instance_w_params(HostSimple instance_data,
-    WriteParams_t params) {
+    public void unregister_instance_w_params(DdsHostSimple instance_data,
+                                             WriteParams_t params) {
 
         unregister_instance_w_params_untyped(
             instance_data, params);
     }
 
-    public void write(HostSimple instance_data, InstanceHandle_t handle) {
+    public void write(DdsHostSimple instance_data, InstanceHandle_t handle) {
         write_untyped(instance_data, handle);
     }
 
-    public void write_w_timestamp(HostSimple instance_data,
-    InstanceHandle_t handle, Time_t source_timestamp) {
+    public void write_w_timestamp(DdsHostSimple instance_data,
+                                  InstanceHandle_t handle, Time_t source_timestamp) {
 
         write_w_timestamp_untyped(instance_data, handle, source_timestamp);
     }
 
-    public void write_w_params(HostSimple instance_data,
-    WriteParams_t params) {
+    public void write_w_params(DdsHostSimple instance_data,
+                               WriteParams_t params) {
 
         write_w_params_untyped(instance_data, params);
     }
 
-    public void dispose(HostSimple instance_data, InstanceHandle_t instance_handle){
+    public void dispose(DdsHostSimple instance_data, InstanceHandle_t instance_handle){
         dispose_untyped(instance_data, instance_handle);
     }
 
-    public void dispose_w_timestamp(HostSimple instance_data,
-    InstanceHandle_t instance_handle, Time_t source_timestamp) {
+    public void dispose_w_timestamp(DdsHostSimple instance_data,
+                                    InstanceHandle_t instance_handle, Time_t source_timestamp) {
 
         dispose_w_timestamp_untyped(
             instance_data, instance_handle, source_timestamp);
     }
 
-    public void dispose_w_params(HostSimple instance_data,
-    WriteParams_t params) {
+    public void dispose_w_params(DdsHostSimple instance_data,
+                                 WriteParams_t params) {
 
         dispose_w_params_untyped(instance_data, params);
     }
 
-    public void get_key_value(HostSimple key_holder, InstanceHandle_t handle) {
+    public void get_key_value(DdsHostSimple key_holder, InstanceHandle_t handle) {
         get_key_value_untyped(key_holder, handle);
     }
 
-    public InstanceHandle_t lookup_instance(HostSimple key_holder) {
+    public InstanceHandle_t lookup_instance(DdsHostSimple key_holder) {
         return lookup_instance_untyped(key_holder);
     }
 

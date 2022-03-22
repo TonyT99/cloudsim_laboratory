@@ -39,19 +39,19 @@ public final class DatacenterSimpleSeq extends LoanableSequence implements Copya
     // --- Constructors: -----------------------------------------------------
 
     public DatacenterSimpleSeq() {
-        super(DatacenterSimple.class);
+        super(DdsDatacenterSimple.class);
     }
 
     public DatacenterSimpleSeq(int initialMaximum) {
-        super(DatacenterSimple.class, initialMaximum);
+        super(DdsDatacenterSimple.class, initialMaximum);
     }
 
     public DatacenterSimpleSeq(Collection<?> elements) {
-        super(DatacenterSimple.class, elements);
+        super(DdsDatacenterSimple.class, elements);
     }
 
-    public DatacenterSimple get(int index) {
-        return (DatacenterSimple) super.get(index);
+    public DdsDatacenterSimple get(int index) {
+        return (DdsDatacenterSimple) super.get(index);
     }
 
     // --- From Copyable: ----------------------------------------------------
@@ -99,7 +99,7 @@ public final class DatacenterSimpleSeq extends LoanableSequence implements Copya
                 // check to see if our entry is null, if it is, a new instance has to be allocated
                 if (get(i) == null){
 
-                    set(i, DatacenterSimple.create());
+                    set(i, DdsDatacenterSimple.create());
                 }
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }
@@ -111,7 +111,7 @@ public final class DatacenterSimpleSeq extends LoanableSequence implements Copya
                 add(null);
             } else {
                 // NOTE: we need to create a new object here to hold the copy
-                add(DatacenterSimple.create());
+                add(DdsDatacenterSimple.create());
                 // we need to do a set here since enums aren't truely Copyable
                 set(i, ((Copyable) get(i)).copy_from(typedSrc.get(i)));
             }
