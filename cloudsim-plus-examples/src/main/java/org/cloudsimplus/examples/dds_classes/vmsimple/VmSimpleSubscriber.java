@@ -12,6 +12,7 @@
 
 package org.cloudsimplus.examples.dds_classes.vmsimple;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import com.rti.dds.domain.DomainParticipant;
@@ -23,14 +24,16 @@ import com.rti.dds.infrastructure.RETCODE_TIMEOUT;
 import com.rti.dds.infrastructure.ResourceLimitsQosPolicy;
 import com.rti.dds.infrastructure.StatusKind;
 import com.rti.dds.infrastructure.WaitSet;
-import com.rti.dds.subscription.InstanceStateKind;
-import com.rti.dds.subscription.ReadCondition;
-import com.rti.dds.subscription.SampleInfo;
-import com.rti.dds.subscription.SampleInfoSeq;
-import com.rti.dds.subscription.SampleStateKind;
-import com.rti.dds.subscription.Subscriber;
-import com.rti.dds.subscription.ViewStateKind;
+import com.rti.dds.subscription.*;
 import com.rti.dds.topic.Topic;
+import org.cloudbus.cloudsim.core.CloudSim;
+import org.cloudbus.cloudsim.datacenters.DatacenterSimple;
+import org.cloudbus.cloudsim.hosts.HostSimple;
+import org.cloudbus.cloudsim.resources.Pe;
+import org.cloudbus.cloudsim.resources.PeSimple;
+import org.cloudbus.cloudsim.vms.VmSimple;
+import org.cloudsimplus.examples.dds_classes.ddsreport.DDSReportDataReader;
+import org.cloudsimplus.examples.dds_classes.ddsreport.DDSReportSeq;
 
 /**
 * Simple example showing all Connext code in one place for readability.
@@ -41,6 +44,101 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
     private VmSimpleDataReader reader = null;
     private final VmSimpleSeq dataSeq = new VmSimpleSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
+
+    private static class ReaderListener extends DataReaderAdapter {
+        public void on_requested_deadline_missed(
+            DataReader dataReader,
+            RequestedDeadlineMissedStatus status)
+        {
+            System.out.println("ReaderListener: on_requested_deadline_missed()");
+        }
+
+        public void on_requested_incompatible_qos(
+            DataReader dataReader,
+            RequestedIncompatibleQosStatus status)
+        {
+            System.out.println("ReaderListener: on_requested_incompatible_qos()");
+        }
+
+        public void on_sample_rejected(
+            DataReader dataReader,
+            SampleRejectedStatus status)
+        {
+            System.out.println("ReaderListener: on_sample_rejected()");
+        }
+
+        public void on_liveliness_changed(
+            DataReader dataReader,
+            LivelinessChangedStatus status)
+        {
+            System.out.println("ReaderListener: on_liveliness_changed()");
+            System.out.print("  Alive writers: " + status.alive_count + "\n");
+        }
+
+        public void on_sample_lost(
+            DataReader dataReader,
+            SampleLostStatus status)
+        {
+            System.out.println("ReaderListener: on_sample_lost()");
+        }
+
+        public void on_subscription_matched(
+            DataReader dataReader,
+            SubscriptionMatchedStatus status)
+        {
+            System.out.println("ReaderListener: on_subscription_matched()");
+        }
+
+        public void on_data_available(DataReader dataReader)
+        {
+            System.out.println("ReaderListener: on_data_available()");
+
+            DDSReportDataReader listenersReader =
+                (DDSReportDataReader ) dataReader;
+
+            DDSReportSeq _dataSeq = new DDSReportSeq();
+            SampleInfoSeq _infoSeq = new SampleInfoSeq();
+
+            try {
+                listenersReader.take(
+                    _dataSeq, _infoSeq,
+                    ResourceLimitsQosPolicy.LENGTH_UNLIMITED,
+                    SampleStateKind.ANY_SAMPLE_STATE,
+                    ViewStateKind.ANY_VIEW_STATE,
+                    InstanceStateKind.ANY_INSTANCE_STATE);
+
+                for(int i = 0; i < _infoSeq.size(); ++i) {
+                    SampleInfo info = (SampleInfo)_infoSeq.get(i);
+
+                    /*if (info.valid_data) {
+                        System.out.println("Received" + _dataSeq.get(i));
+                        id = _dataSeq.get(i).timestamp;
+                        dataCenters = _dataSeq.get(i).dataCenterNumber;
+                        hosts = _dataSeq.get(i).hostNumber;
+                        vms = _dataSeq.get(i).vmNumber;
+                        final var peList = new ArrayList<Pe>(2);
+                        peList.add(new PeSimple(200));
+                        ArrayList<DatacenterSimple> dcList = new ArrayList<DatacenterSimple>();
+                        ArrayList<HostSimple> hostList = new ArrayList<HostSimple>();
+                        ArrayList<VmSimple> vmList = new ArrayList<VmSimple>();
+                        for (int j = 0; j < vms; j++) { vmList.add(new VmSimple(j, 20,5000)); }
+                        for (int j = 0; j < hosts; j++) { hostList.add(new HostSimple(512, 30, 40, peList)); }
+                        for (int j = 0; j < dataCenters; j++) {
+                            CloudSim simulation = new CloudSim();
+                            dcList.add(new DatacenterSimple(simulation, hostList));
+                        }
+                        System.out.println("Simulation is set.");
+                    } else {
+                        System.out.print("   Got metadata\n");
+                    }*/
+                }
+            } catch (RETCODE_NO_DATA noData) {
+                // No data to process
+            } finally {
+                listenersReader.return_loan(_dataSeq, _infoSeq);
+            }
+        }
+    }
 
     private int processData() {
         int samplesRead = 0;
@@ -71,7 +169,7 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
         return samplesRead;
     }
 
-    private void runApplication() {
+    private void runApplication() throws InterruptedException {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
@@ -101,12 +199,13 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
                 StatusKind.STATUS_MASK_NONE));
 
         // This DataReader reads data on "Example VmSimple" Topic
+        ReaderListener listener = new ReaderListener();
         reader = (VmSimpleDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,
                 Subscriber.DATAREADER_QOS_DEFAULT,
-                null, // listener
-                StatusKind.STATUS_MASK_NONE));
+                listener, // listener
+                StatusKind.DATA_AVAILABLE_STATUS));
 
         // Create ReadCondition that triggers when data in reader's queue
         ReadCondition condition = reader.create_readcondition(
@@ -114,8 +213,13 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
             ViewStateKind.ANY_VIEW_STATE,
             InstanceStateKind.ANY_INSTANCE_STATE);
 
+        while (true) {
+            //processData();
+            Thread.sleep(100);  // in millisec
+            //System.out.println("Waiting for data");
+        }
         // WaitSet will be woken when the attached condition is triggered, or timeout
-        WaitSet waitset = new WaitSet();
+        /*WaitSet waitset = new WaitSet();
         waitset.attach_condition(condition);
         final Duration_t waitTimeout = new Duration_t(1, 0);
 
@@ -135,7 +239,7 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
                 // No data received, not a problem
                 System.out.printf("No data after %d seconds.%n", waitTimeout.sec);
             }
-        }
+        }*/
     }
 
     @Override
@@ -149,7 +253,7 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         // Create example and run: Uses try-with-resources,
         // subscriberApplication.close() automatically called
         try (VmSimpleSubscriber subscriberApplication = new VmSimpleSubscriber()) {
