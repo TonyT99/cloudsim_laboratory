@@ -28,6 +28,13 @@ public class DatacenterSimplePublisher extends Application implements AutoClosea
 
     // Usually one per application
     private DomainParticipant participant = null;
+    int id;
+    int timestamp;
+
+    DatacenterSimplePublisher(int id, int timestamp) {
+        this.id = id;
+        this.timestamp = timestamp;
+    }
 
     private void runApplication() {
         // Start communicating in a domain
@@ -69,14 +76,14 @@ public class DatacenterSimplePublisher extends Application implements AutoClosea
         // Create data sample for writing
         DdsDatacenterSimple data = new DdsDatacenterSimple();
 
-        for (int samplesWritten = 0; !isShutdownRequested()
-        && samplesWritten < getMaxSampleCount(); samplesWritten++) {
+        for (int i = 0; !isShutdownRequested()
+        && i < 1; i++) {
 
             // Modify the data to be written here
-            data.id = samplesWritten;
-            data.timestampOfReport = samplesWritten;
+            data.id = this.id;
+            data.timestampOfReport = this.timestamp;
 
-            System.out.println("Writing datacentersimple, count " + samplesWritten);
+            System.out.println("Writing DatacenterSimple");
 
             writer.write(data, InstanceHandle_t.HANDLE_NIL);
             try {
@@ -103,8 +110,8 @@ public class DatacenterSimplePublisher extends Application implements AutoClosea
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // publisherApplication.close() automatically called
-        try (DatacenterSimplePublisher publisherApplication = new DatacenterSimplePublisher()) {
-            publisherApplication.parseArguments(args);
+        try (DatacenterSimplePublisher publisherApplication = new DatacenterSimplePublisher(Integer.parseInt(args[0]), Integer.parseInt(args[1]))) {
+            //publisherApplication.parseArguments(args);
             publisherApplication.addShutdownHook();
             publisherApplication.runApplication();
         }

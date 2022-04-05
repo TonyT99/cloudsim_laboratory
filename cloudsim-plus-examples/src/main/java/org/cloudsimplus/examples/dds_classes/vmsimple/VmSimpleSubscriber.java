@@ -44,6 +44,14 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
     private VmSimpleDataReader reader = null;
     private final VmSimpleSeq dataSeq = new VmSimpleSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
+    public static ArrayList<Integer> id = new ArrayList<>();
+    public static ArrayList<Integer> hostId = new ArrayList<>();
+    public static ArrayList<Integer> timestampOfReport = new ArrayList<>();
+    public static ArrayList<Integer> mips = new ArrayList<>();
+    public static ArrayList<Integer> numberOfPEs = new ArrayList<>();
+    public static ArrayList<Integer> ram = new ArrayList<>();
+    public static ArrayList<Integer> bw = new ArrayList<>();
+    public static ArrayList<Integer> size = new ArrayList<>();
 
     private static class ReaderListener extends DataReaderAdapter {
         public void on_requested_deadline_missed(
@@ -93,10 +101,10 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
         {
             System.out.println("ReaderListener: on_data_available()");
 
-            DDSReportDataReader listenersReader =
-                (DDSReportDataReader ) dataReader;
+            VmSimpleDataReader listenersReader =
+                (VmSimpleDataReader) dataReader;
 
-            DDSReportSeq _dataSeq = new DDSReportSeq();
+            VmSimpleSeq _dataSeq = new VmSimpleSeq();
             SampleInfoSeq _infoSeq = new SampleInfoSeq();
 
             try {
@@ -110,27 +118,19 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
                 for(int i = 0; i < _infoSeq.size(); ++i) {
                     SampleInfo info = (SampleInfo)_infoSeq.get(i);
 
-                    /*if (info.valid_data) {
+                    if (info.valid_data) {
                         System.out.println("Received" + _dataSeq.get(i));
-                        id = _dataSeq.get(i).timestamp;
-                        dataCenters = _dataSeq.get(i).dataCenterNumber;
-                        hosts = _dataSeq.get(i).hostNumber;
-                        vms = _dataSeq.get(i).vmNumber;
-                        final var peList = new ArrayList<Pe>(2);
-                        peList.add(new PeSimple(200));
-                        ArrayList<DatacenterSimple> dcList = new ArrayList<DatacenterSimple>();
-                        ArrayList<HostSimple> hostList = new ArrayList<HostSimple>();
-                        ArrayList<VmSimple> vmList = new ArrayList<VmSimple>();
-                        for (int j = 0; j < vms; j++) { vmList.add(new VmSimple(j, 20,5000)); }
-                        for (int j = 0; j < hosts; j++) { hostList.add(new HostSimple(512, 30, 40, peList)); }
-                        for (int j = 0; j < dataCenters; j++) {
-                            CloudSim simulation = new CloudSim();
-                            dcList.add(new DatacenterSimple(simulation, hostList));
-                        }
-                        System.out.println("Simulation is set.");
+                        id.add(_dataSeq.get(i).id);
+                        hostId.add(_dataSeq.get(i).hostId);
+                        timestampOfReport.add(_dataSeq.get(i).timestampOfReport);
+                        mips.add(_dataSeq.get(i).mips);
+                        numberOfPEs.add(_dataSeq.get(i).numberOfPEs);
+                        ram.add(_dataSeq.get(i).ram);
+                        bw.add(_dataSeq.get(i).bw);
+                        size.add(_dataSeq.get(i).size);
                     } else {
                         System.out.print("   Got metadata\n");
-                    }*/
+                    }
                 }
             } catch (RETCODE_NO_DATA noData) {
                 // No data to process
@@ -251,6 +251,17 @@ public class VmSimpleSubscriber extends Application implements AutoCloseable {
             DomainParticipantFactory.get_instance()
             .delete_participant(participant);
         }
+    }
+
+    public static void clear() {
+        id.clear();
+        hostId.clear();
+        timestampOfReport.clear();
+        mips.clear();
+        numberOfPEs.clear();
+        ram.clear();
+        bw.clear();
+        size.clear();
     }
 
     public static void main(String[] args) throws InterruptedException {

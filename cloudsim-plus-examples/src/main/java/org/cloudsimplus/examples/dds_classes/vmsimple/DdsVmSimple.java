@@ -18,8 +18,8 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class DdsVmSimple implements Copyable, Serializable{
 
-    public short id = (short)0;
-    public short hostId = (short)0;
+    public int id = (short)0;
+    public int hostId = (short)0;
     public int timestampOfReport = (int)0;
     public int mips = (int)0;
     public int numberOfPEs = (int)0;

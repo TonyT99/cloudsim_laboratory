@@ -42,10 +42,11 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
     private DDSReportDataReader reader = null;
     private final DDSReportSeq dataSeq = new DDSReportSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
-    private static int id;
-    private static int dataCenters;
-    private static int hosts;
-    private static int vms;
+
+    public static int id;
+    public static int dataCenters;
+    public static int hosts;
+    public static int vms;
     //private String topicName;
 
     private static class ReaderListener extends DataReaderAdapter {
@@ -119,7 +120,7 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
                         dataCenters = _dataSeq.get(i).dataCenterNumber;
                         hosts = _dataSeq.get(i).hostNumber;
                         vms = _dataSeq.get(i).vmNumber;
-                        final var peList = new ArrayList<Pe>(2);
+                        /*final var peList = new ArrayList<Pe>(2);
                         peList.add(new PeSimple(200));
                         ArrayList<DatacenterSimple> dcList = new ArrayList<DatacenterSimple>();
                         ArrayList<HostSimple> hostList = new ArrayList<HostSimple>();
@@ -130,7 +131,7 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
                             CloudSim simulation = new CloudSim();
                             dcList.add(new DatacenterSimple(simulation, hostList));
                         }
-                        System.out.println("Simulation is set.");
+                        System.out.println("Simulation is set.");*/
                     } else {
                         System.out.print("   Got metadata\n");
                     }
@@ -275,6 +276,13 @@ public class DDSReportSubscriber extends Application implements AutoCloseable {
             DomainParticipantFactory.get_instance()
             .delete_participant(participant);
         }
+    }
+
+    public static void clear(){
+        id = 0;
+        dataCenters = 0;
+        hosts = 0;
+        vms = 0;
     }
 
     public static void main(String[] args) throws InterruptedException {

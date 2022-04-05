@@ -18,8 +18,8 @@ import com.rti.dds.cdr.CdrHelper;
 
 public class DdsHostSimple implements Copyable, Serializable{
 
-    public short id = (short)0;
-    public short datacenterId = (short)0;
+    public int id = (short)0;
+    public int datacenterId = (short)0;
     public int timestampOfReport = (int)0;
     public int ram = (int)0;
     public int bw = (int)0;

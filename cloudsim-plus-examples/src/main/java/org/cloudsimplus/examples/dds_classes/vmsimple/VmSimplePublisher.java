@@ -29,6 +29,26 @@ public class VmSimplePublisher extends Application implements AutoCloseable {
     // Usually one per application
     private DomainParticipant participant = null;
 
+    int id;
+    int hostId;
+    int timestampOfReport;
+    int mips;
+    int numberOfPEs;
+    int ram;
+    int bw;
+    int size;
+
+    public VmSimplePublisher(int id, int hostId, int timestampOfReport, int mips, int numberOfPEs, int ram, int bw, int size) {
+        this.id = id;
+        this.hostId = hostId;
+        this.timestampOfReport = timestampOfReport;
+        this.mips = mips;
+        this.numberOfPEs = numberOfPEs;
+        this.ram = ram;
+        this.bw = bw;
+        this.size = size;
+    }
+
     private void runApplication() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
@@ -69,20 +89,20 @@ public class VmSimplePublisher extends Application implements AutoCloseable {
         // Create data sample for writing
         DdsVmSimple data = new DdsVmSimple();
 
-        for (int samplesWritten = 0; !isShutdownRequested()
-        && samplesWritten < getMaxSampleCount(); samplesWritten++) {
+        for (int i = 0; !isShutdownRequested()
+        && i < 7; i++) {
 
             // Modify the data to be written here
-            data.id = (short) samplesWritten;
-            data.hostId = (short) samplesWritten;
-            data.timestampOfReport = samplesWritten;
-            data.mips = samplesWritten;
-            data.numberOfPEs = samplesWritten;
-            data.ram = samplesWritten;
-            data.bw = samplesWritten;
-            data.size = samplesWritten;
+            data.id = this.id;
+            data.hostId = this.hostId;
+            data.timestampOfReport = this.timestampOfReport;
+            data.mips = this.mips;
+            data.numberOfPEs = this.numberOfPEs;
+            data.ram = this.ram;
+            data.bw = this.bw;
+            data.size = this.size;
 
-            System.out.println("Writing VmSimple, count " + samplesWritten);
+            System.out.println("Writing VmSimple");
 
             writer.write(data, InstanceHandle_t.HANDLE_NIL);
             try {
@@ -109,8 +129,10 @@ public class VmSimplePublisher extends Application implements AutoCloseable {
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // publisherApplication.close() automatically called
-        try (VmSimplePublisher publisherApplication = new VmSimplePublisher()) {
-            publisherApplication.parseArguments(args);
+        try (VmSimplePublisher publisherApplication = new VmSimplePublisher(Integer.parseInt(args[0]),
+            Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]),
+            Integer.parseInt(args[5]), Integer.parseInt(args[6]), Integer.parseInt(args[7]))) {
+            //publisherApplication.parseArguments(args);
             publisherApplication.addShutdownHook();
             publisherApplication.runApplication();
         }

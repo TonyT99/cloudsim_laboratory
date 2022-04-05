@@ -29,6 +29,22 @@ public class HostSimplePublisher extends Application implements AutoCloseable {
     // Usually one per application
     private DomainParticipant participant = null;
 
+    int id;
+    int datacenterId ;
+    int timestampOfReport;
+    int ram;
+    int bw;
+    int size;
+
+    public HostSimplePublisher(int id, int datacenterId, int timestampOfReport, int ram, int bw, int size) {
+        this.id = id;
+        this.datacenterId = datacenterId;
+        this.timestampOfReport = timestampOfReport;
+        this.ram = ram;
+        this.bw = bw;
+        this.size = size;
+    }
+
     private void runApplication() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
@@ -69,18 +85,18 @@ public class HostSimplePublisher extends Application implements AutoCloseable {
         // Create data sample for writing
         DdsHostSimple data = new DdsHostSimple();
 
-        for (int samplesWritten = 0; !isShutdownRequested()
-        && samplesWritten < getMaxSampleCount(); samplesWritten++) {
+        for (int i = 0; !isShutdownRequested()
+        && i < 2; i++) {
 
             // Modify the data to be written here
-            data.id = (short) samplesWritten;
-            data.datacenterId = (short) samplesWritten;
-            data.timestampOfReport = samplesWritten;
-            data.ram = samplesWritten;
-            data.bw = samplesWritten;
-            data.size = samplesWritten;
+            data.id = this.id;
+            data.datacenterId = this.datacenterId;
+            data.timestampOfReport = this.timestampOfReport;
+            data.ram = this.ram;
+            data.bw = this.bw;
+            data.size = this.size;
 
-            System.out.println("Writing HostSimple, count " + samplesWritten);
+            System.out.println("Writing HostSimple");
 
             writer.write(data, InstanceHandle_t.HANDLE_NIL);
             try {
@@ -107,8 +123,10 @@ public class HostSimplePublisher extends Application implements AutoCloseable {
     public static void main(String[] args) {
         // Create example and run: Uses try-with-resources,
         // publisherApplication.close() automatically called
-        try (HostSimplePublisher publisherApplication = new HostSimplePublisher()) {
-            publisherApplication.parseArguments(args);
+        try (HostSimplePublisher publisherApplication = new HostSimplePublisher(Integer.parseInt(args[0]),
+            Integer.parseInt(args[1]), Integer.parseInt(args[2]), Integer.parseInt(args[3]), Integer.parseInt(args[4]),
+            Integer.parseInt(args[5]))) {
+            //publisherApplication.parseArguments(args);
             publisherApplication.addShutdownHook();
             publisherApplication.runApplication();
         }

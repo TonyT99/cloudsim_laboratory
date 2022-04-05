@@ -45,6 +45,8 @@ public class DatacenterSimpleSubscriber extends Application implements AutoClose
     private DatacenterSimpleDataReader reader = null;
     private final DatacenterSimpleSeq dataSeq = new DatacenterSimpleSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
+    public static ArrayList<Integer> ids = new ArrayList<>();
+    public static ArrayList<Integer> timestamps = new ArrayList<>();
 
     private static class ReaderListener extends DataReaderAdapter {
         public void on_requested_deadline_missed(
@@ -94,10 +96,10 @@ public class DatacenterSimpleSubscriber extends Application implements AutoClose
         {
             System.out.println("ReaderListener: on_data_available()");
 
-            DDSReportDataReader listenersReader =
-                (DDSReportDataReader ) dataReader;
+            DatacenterSimpleDataReader listenersReader =
+                (DatacenterSimpleDataReader ) dataReader;
 
-            DDSReportSeq _dataSeq = new DDSReportSeq();
+            DatacenterSimpleSeq _dataSeq = new DatacenterSimpleSeq();
             SampleInfoSeq _infoSeq = new SampleInfoSeq();
 
             try {
@@ -111,27 +113,13 @@ public class DatacenterSimpleSubscriber extends Application implements AutoClose
                 for(int i = 0; i < _infoSeq.size(); ++i) {
                     SampleInfo info = (SampleInfo)_infoSeq.get(i);
 
-                    /*if (info.valid_data) {
+                    if (info.valid_data) {
                         System.out.println("Received" + _dataSeq.get(i));
-                        id = _dataSeq.get(i).timestamp;
-                        dataCenters = _dataSeq.get(i).dataCenterNumber;
-                        hosts = _dataSeq.get(i).hostNumber;
-                        vms = _dataSeq.get(i).vmNumber;
-                        final var peList = new ArrayList<Pe>(2);
-                        peList.add(new PeSimple(200));
-                        ArrayList<DatacenterSimple> dcList = new ArrayList<DatacenterSimple>();
-                        ArrayList<HostSimple> hostList = new ArrayList<HostSimple>();
-                        ArrayList<VmSimple> vmList = new ArrayList<VmSimple>();
-                        for (int j = 0; j < vms; j++) { vmList.add(new VmSimple(j, 20,5000)); }
-                        for (int j = 0; j < hosts; j++) { hostList.add(new HostSimple(512, 30, 40, peList)); }
-                        for (int j = 0; j < dataCenters; j++) {
-                            CloudSim simulation = new CloudSim();
-                            dcList.add(new DatacenterSimple(simulation, hostList));
-                        }
-                        System.out.println("Simulation is set.");
+                        ids.add(_dataSeq.get(i).id);
+                        timestamps.add(_dataSeq.get(i).timestampOfReport);
                     } else {
                         System.out.print("   Got metadata\n");
-                    }*/
+                    }
                 }
             } catch (RETCODE_NO_DATA noData) {
                 // No data to process
@@ -252,6 +240,11 @@ public class DatacenterSimpleSubscriber extends Application implements AutoClose
             DomainParticipantFactory.get_instance()
             .delete_participant(participant);
         }
+    }
+
+    public static void clear() {
+        ids.clear();
+        timestamps.clear();
     }
 
     public static void main(String[] args) throws InterruptedException {

@@ -12,6 +12,7 @@
 
 package org.cloudsimplus.examples.dds_classes.hostsimple;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -44,6 +45,12 @@ public class HostSimpleSubscriber extends Application implements AutoCloseable {
     private HostSimpleDataReader reader = null;
     private final HostSimpleSeq dataSeq = new HostSimpleSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
+    public static ArrayList<Integer> id = new ArrayList<>();
+    public static ArrayList<Integer> datacenterId = new ArrayList<>();
+    public static ArrayList<Integer> timestamp = new ArrayList<>();
+    public static ArrayList<Integer> ram = new ArrayList<>();
+    public static ArrayList<Integer> bw = new ArrayList<>();
+    public static ArrayList<Integer> size = new ArrayList<>();
 
     private static class ReaderListener extends DataReaderAdapter {
         public void on_requested_deadline_missed(
@@ -93,10 +100,10 @@ public class HostSimpleSubscriber extends Application implements AutoCloseable {
         {
             System.out.println("ReaderListener: on_data_available()");
 
-            DDSReportDataReader listenersReader =
-                (DDSReportDataReader ) dataReader;
+            HostSimpleDataReader listenersReader =
+                (HostSimpleDataReader ) dataReader;
 
-            DDSReportSeq _dataSeq = new DDSReportSeq();
+            HostSimpleSeq _dataSeq = new HostSimpleSeq();
             SampleInfoSeq _infoSeq = new SampleInfoSeq();
 
             try {
@@ -110,27 +117,17 @@ public class HostSimpleSubscriber extends Application implements AutoCloseable {
                 for(int i = 0; i < _infoSeq.size(); ++i) {
                     SampleInfo info = (SampleInfo)_infoSeq.get(i);
 
-                   /* if (info.valid_data) {
+                    if (info.valid_data) {
                         System.out.println("Received" + _dataSeq.get(i));
-                        id = _dataSeq.get(i).timestamp;
-                        dataCenters = _dataSeq.get(i).dataCenterNumber;
-                        hosts = _dataSeq.get(i).hostNumber;
-                        vms = _dataSeq.get(i).vmNumber;
-                        final var peList = new ArrayList<Pe>(2);
-                        peList.add(new PeSimple(200));
-                        ArrayList<DatacenterSimple> dcList = new ArrayList<DatacenterSimple>();
-                        ArrayList<HostSimple> hostList = new ArrayList<HostSimple>();
-                        ArrayList<VmSimple> vmList = new ArrayList<VmSimple>();
-                        for (int j = 0; j < vms; j++) { vmList.add(new VmSimple(j, 20,5000)); }
-                        for (int j = 0; j < hosts; j++) { hostList.add(new HostSimple(512, 30, 40, peList)); }
-                        for (int j = 0; j < dataCenters; j++) {
-                            CloudSim simulation = new CloudSim();
-                            dcList.add(new DatacenterSimple(simulation, hostList));
-                        }
-                        System.out.println("Simulation is set.");
+                        id.add(_dataSeq.get(i).id);
+                        datacenterId.add(_dataSeq.get(i).datacenterId);
+                        timestamp.add(_dataSeq.get(i).timestampOfReport);
+                        ram.add(_dataSeq.get(i).ram);
+                        bw.add(_dataSeq.get(i).bw);
+                        size.add(_dataSeq.get(i).size);
                     } else {
                         System.out.print("   Got metadata\n");
-                    }*/
+                    }
                 }
             } catch (RETCODE_NO_DATA noData) {
                 // No data to process
@@ -250,6 +247,15 @@ public class HostSimpleSubscriber extends Application implements AutoCloseable {
             DomainParticipantFactory.get_instance()
             .delete_participant(participant);
         }
+    }
+
+    public static void clear() {
+        id.clear();
+        datacenterId.clear();
+        timestamp.clear();
+        ram.clear();
+        bw.clear();
+        size.clear();
     }
 
     public static void main(String[] args) throws InterruptedException {
