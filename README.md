@@ -252,15 +252,15 @@ long bw = 100000; //in Megabits/s
 //Uses a PeProvisionerSimple by default to provision PEs for VMs
 //Uses ResourceProvisionerSimple by default for RAM and BW provisioning
 //Uses VmSchedulerSpaceShared by default for VM scheduling
-var host0 = new HostSimple(ram, bw, storage, List.of(new PeSimple(20000)));
+var host0 = new ddsgen.HostSimple(ram, bw, storage, List.of(new PeSimple(20000)));
 
 //Creates a Datacenter with a list of Hosts.
 //Uses a VmAllocationPolicySimple by default to allocate VMs
-var dc0 = new DatacenterSimple(simulation, List.of(host0));
+var dc0 = new ddsgen.DatacenterSimple(simulation, List.of(host0));
 
 //Creates one VM to run applications.
 //Uses a CloudletSchedulerTimeShared by default to schedule Cloudlets
-var vm0 = new VmSimple(1000, 1);
+var vm0 = new ddsgen.VmSimple(1000, 1);
 vm0.setRam(1000).setBw(1000).setSize(1000);
 
 //Creates Cloudlets that represent applications to be run inside a VM.

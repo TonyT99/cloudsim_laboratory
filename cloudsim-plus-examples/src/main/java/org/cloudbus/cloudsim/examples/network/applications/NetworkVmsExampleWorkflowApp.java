@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * An example of a Workflow Distributed Application that is compounded by
+ * An example of a Workflow Distributed ddsgen.Application that is compounded by
  * 3 {@link NetworkCloudlet}, each one having different stages
  * such as sending, receiving or processing data.
  *
@@ -40,7 +40,7 @@ public class NetworkVmsExampleWorkflowApp extends NetworkVmExampleAbstract {
             networkCloudletList[i] =
                     createNetworkCloudlet(selectedVms.get(i), broker);
             System.out.printf(
-                "Created NetworkCloudlet %d for Application %d%n",
+                "Created NetworkCloudlet %d for ddsgen.Application %d%n",
                 networkCloudletList[i].getId(), broker.getId());
         }
 

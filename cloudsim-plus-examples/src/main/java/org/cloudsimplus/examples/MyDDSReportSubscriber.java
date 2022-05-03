@@ -5,26 +5,26 @@ import com.rti.dds.domain.DomainParticipantFactory;
 import com.rti.dds.infrastructure.*;
 import com.rti.dds.subscription.*;
 import com.rti.dds.topic.Topic;
-import ddsgen.HostSimple;
-import ddsgen.HostSimpleDataReader;
-import ddsgen.HostSimpleSeq;
-import ddsgen.HostSimpleTypeSupport;
+import ddsgen.DDSReport;
+import ddsgen.DDSReportDataReader;
+import ddsgen.DDSReportSeq;
+import ddsgen.DDSReportTypeSupport;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class MyHostsimpleSubscriber {
+public class MyDDSReportSubscriber {
     private DomainParticipant participant = null; // Usually one per application
-    private HostSimpleDataReader reader = null;
-    private final HostSimpleSeq dataSeq = new HostSimpleSeq();
+    private DDSReportDataReader reader = null;
+    private final DDSReportSeq dataSeq = new DDSReportSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
 
-    private int samplesNumber = 0;
-    private final ArrayList<HostSimple> collectedData = new ArrayList<>();
+    private int sampleNumber = 0;
+    private final ArrayList<DDSReport> collectedData = new ArrayList<>();
 
-    public MyHostsimpleSubscriber(int samplesNumber) { this.samplesNumber = samplesNumber; }
+    public MyDDSReportSubscriber(int sampleNumber) { this.sampleNumber = sampleNumber; }
+    public ArrayList<DDSReport> getCollectedData() { return collectedData; }
 
-    public ArrayList<HostSimple> getCollectedData() { return collectedData; };
 
     private int processData() {
         int samplesRead = 0;
@@ -73,20 +73,20 @@ public class MyHostsimpleSubscriber {
                 StatusKind.STATUS_MASK_NONE));
 
         // Register the datatype to use when creating the Topic
-        String typeName = HostSimpleTypeSupport.get_type_name();
-        HostSimpleTypeSupport.register_type(participant, typeName);
+        String typeName = DDSReportTypeSupport.get_type_name();
+        DDSReportTypeSupport.register_type(participant, typeName);
 
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example ddsgen.HostSimple",
+                "Example ddsgen.DDSReport",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataReader reads data on "Example ddsgen.HostSimple" Topic
-        reader = (HostSimpleDataReader) Objects.requireNonNull(
+        // This DataReader reads data on "Example ddsgen.DDSReport" Topic
+        reader = (DDSReportDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,
                 Subscriber.DATAREADER_QOS_DEFAULT,
@@ -108,7 +108,7 @@ public class MyHostsimpleSubscriber {
         ConditionSeq activeConditions = new ConditionSeq();
 
         // Main loop. Wait for data to arrive and process when it arrives
-        while (samplesRead < samplesNumber) {
+        while (samplesRead < sampleNumber) {
             try {
                 // Wait fills in activeConditions or times out
                 waitset.wait(activeConditions, waitTimeout);

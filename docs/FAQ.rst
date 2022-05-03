@@ -239,7 +239,7 @@ can be set further using the respective setter methods.
 
 .. code:: java
 
-    Datacenter dc0 = new DatacenterSimple(cloudsim, hostList, new VmAllocationPolicySimple());
+    Datacenter dc0 = new ddsgen.DatacenterSimple(cloudsim, hostList, new VmAllocationPolicySimple());
 
 | The way you instantiate a host has changed too. The classes
 ``RamProvisionerSimple`` and ``BwProvisionerSimple`` don't exist
@@ -265,7 +265,7 @@ Datacenter, it will generate an ID for those hosts.
     long storage = 1000000; //in MB
     //Uses ResourceProvisionerSimple by default for RAM and BW provisioning
     //Uses VmSchedulerSpaceShared by default for VM scheduling
-    Host host = new HostSimple(ram, bw, storage, pesList);
+    Host host = new ddsgen.HostSimple(ram, bw, storage, pesList);
     host.setRamProvisioner(new ResourceProvisionerSimple());
 
 | Additionally, the interface ``Storage`` was renamed to ``FileStorage``
@@ -305,7 +305,7 @@ behavior is implemented in such handler method. Below we show how to do
 it for Datacenter class. The same steps can be used to enable such
 behavior in Broker as well.
 
-1. Extend DatacenterSimple
+1. Extend ddsgen.DatacenterSimple
 
 2. Define a new tag to describe periodic event
 
@@ -320,7 +320,7 @@ of internal events, otherwise simulation will never finish.**
 
 .. code:: java
 
-    class NewDatacenter extends DatacenterSimple {
+    class NewDatacenter extends ddsgen.DatacenterSimple {
      //choose any unused value you want to represent the tag.
      public static final int PERIODIC_EVENT = 67567; 
 

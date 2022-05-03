@@ -155,7 +155,7 @@ public class TwoCloudletsAndOneTimeSharedVmExample {
      * @return the Datacenter
      */
     private Datacenter createDatacenter() {
-        // Here are the steps needed to create a DatacenterSimple:
+        // Here are the steps needed to create a ddsgen.DatacenterSimple:
         // 1. We need to create a list to store
         // our machine
         List<Host> hostList = new ArrayList<>();
@@ -169,7 +169,7 @@ public class TwoCloudletsAndOneTimeSharedVmExample {
         // 3. Create PEs and add these into a list.
         peList.add(new PeSimple(mips, new PeProvisionerSimple()));
 
-        // 4. Create HostSimple with its id and list of PEs and add them to the list of machines
+        // 4. Create ddsgen.HostSimple with its id and list of PEs and add them to the list of machines
         final long ram = 20000; //in Megabytes
         final long bw = 100000; //in Megabytes
         final long storage = 10000000; //in Megabites/s
@@ -181,7 +181,7 @@ public class TwoCloudletsAndOneTimeSharedVmExample {
 
         hostList.add(host);
 
-        // 6. Finally, we need to create a DatacenterSimple object.
+        // 6. Finally, we need to create a ddsgen.DatacenterSimple object.
         return new DatacenterSimple(simulation, hostList, new VmAllocationPolicySimple());
     }
 

@@ -1,30 +1,44 @@
-package org.cloudsimplus.examples;
+package ddsgen;/*
+* (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
+* RTI grants Licensee a license to use, modify, compile, and create derivative
+* works of the software solely for use with RTI Connext DDS. Licensee may
+* redistribute copies of the software provided that all such copies are subject
+* to this license. The software is provided "as is", with no warranty of any
+* type, including any warranty for fitness for any purpose. RTI is under no
+* obligation to maintain or support the software. RTI shall not be liable for
+* any incidental or consequential damages arising out of the use or inability
+* to use the software.
+*/
+
+import java.util.Objects;
 
 import com.rti.dds.domain.DomainParticipant;
 import com.rti.dds.domain.DomainParticipantFactory;
-import com.rti.dds.infrastructure.*;
-import com.rti.dds.subscription.*;
+import com.rti.dds.infrastructure.ConditionSeq;
+import com.rti.dds.infrastructure.Duration_t;
+import com.rti.dds.infrastructure.RETCODE_NO_DATA;
+import com.rti.dds.infrastructure.RETCODE_TIMEOUT;
+import com.rti.dds.infrastructure.ResourceLimitsQosPolicy;
+import com.rti.dds.infrastructure.StatusKind;
+import com.rti.dds.infrastructure.WaitSet;
+import com.rti.dds.subscription.InstanceStateKind;
+import com.rti.dds.subscription.ReadCondition;
+import com.rti.dds.subscription.SampleInfo;
+import com.rti.dds.subscription.SampleInfoSeq;
+import com.rti.dds.subscription.SampleStateKind;
+import com.rti.dds.subscription.Subscriber;
+import com.rti.dds.subscription.ViewStateKind;
 import com.rti.dds.topic.Topic;
-import ddsgen.HostSimple;
-import ddsgen.HostSimpleDataReader;
-import ddsgen.HostSimpleSeq;
-import ddsgen.HostSimpleTypeSupport;
 
-import java.util.ArrayList;
-import java.util.Objects;
+/**
+* Simple example showing all Connext code in one place for readability.
+*/
+public class HostSimpleSubscriber extends Application implements AutoCloseable {
 
-public class MyHostsimpleSubscriber {
     private DomainParticipant participant = null; // Usually one per application
     private HostSimpleDataReader reader = null;
     private final HostSimpleSeq dataSeq = new HostSimpleSeq();
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
-
-    private int samplesNumber = 0;
-    private final ArrayList<HostSimple> collectedData = new ArrayList<>();
-
-    public MyHostsimpleSubscriber(int samplesNumber) { this.samplesNumber = samplesNumber; }
-
-    public ArrayList<HostSimple> getCollectedData() { return collectedData; };
 
     private int processData() {
         int samplesRead = 0;
@@ -32,17 +46,16 @@ public class MyHostsimpleSubscriber {
         try {
             // Take available data from DataReader's queue
             reader.take(dataSeq, infoSeq,
-                ResourceLimitsQosPolicy.LENGTH_UNLIMITED,
-                SampleStateKind.ANY_SAMPLE_STATE,
-                ViewStateKind.ANY_VIEW_STATE,
-                InstanceStateKind.ANY_INSTANCE_STATE);
+            ResourceLimitsQosPolicy.LENGTH_UNLIMITED,
+            SampleStateKind.ANY_SAMPLE_STATE,
+            ViewStateKind.ANY_VIEW_STATE,
+            InstanceStateKind.ANY_INSTANCE_STATE);
 
             for (int i = 0; i < dataSeq.size(); ++i) {
                 SampleInfo info = infoSeq.get(i);
 
                 if (info.valid_data) {
                     System.out.println("Received" + dataSeq.get(i));
-                    collectedData.add(dataSeq.get(i));
                 }
                 samplesRead++;
             }
@@ -56,11 +69,11 @@ public class MyHostsimpleSubscriber {
         return samplesRead;
     }
 
-    public void runSubscriber() {
+    private void runApplication() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
-                0,
+                getDomainId(),
                 DomainParticipantFactory.PARTICIPANT_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
@@ -108,7 +121,7 @@ public class MyHostsimpleSubscriber {
         ConditionSeq activeConditions = new ConditionSeq();
 
         // Main loop. Wait for data to arrive and process when it arrives
-        while (samplesRead < samplesNumber) {
+        while (!isShutdownRequested() && samplesRead < getMaxSampleCount()) {
             try {
                 // Wait fills in activeConditions or times out
                 waitset.wait(activeConditions, waitTimeout);
@@ -123,13 +136,27 @@ public class MyHostsimpleSubscriber {
         }
     }
 
+    @Override
     public void close() {
         // Delete all entities (DataReader, Topic, Subscriber, DomainParticipant)
         if (participant != null) {
             participant.delete_contained_entities();
 
             DomainParticipantFactory.get_instance()
-                .delete_participant(participant);
+            .delete_participant(participant);
         }
+    }
+
+    public static void main(String[] args) {
+        // Create example and run: Uses try-with-resources,
+        // subscriberApplication.close() automatically called
+        try (HostSimpleSubscriber subscriberApplication = new HostSimpleSubscriber()) {
+            subscriberApplication.parseArguments(args);
+            subscriberApplication.addShutdownHook();
+            subscriberApplication.runApplication();
+        }
+
+        // Releases the memory used by the participant factory. Optional at application exit.
+        DomainParticipantFactory.finalize_instance();
     }
 }

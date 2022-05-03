@@ -5,6 +5,10 @@ import com.rti.dds.domain.DomainParticipantFactory;
 import com.rti.dds.infrastructure.*;
 import com.rti.dds.subscription.*;
 import com.rti.dds.topic.Topic;
+import ddsgen.VmSimple;
+import ddsgen.VmSimpleDataReader;
+import ddsgen.VmSimpleSeq;
+import ddsgen.VmSimpleTypeSupport;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -16,11 +20,11 @@ public class MyVmsimpleSubscriber {
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
 
     private int samplesNumber;
-    private final ArrayList<MyVmsimpleSubscriber> collectedData = new ArrayList<>();
+    private final ArrayList<VmSimple> collectedData = new ArrayList<>();
 
     public MyVmsimpleSubscriber(int samplesNumber) { this.samplesNumber = samplesNumber; }
 
-    public ArrayList<MyVmsimpleSubscriber> getCollectedData() { return collectedData; }
+    public ArrayList<VmSimple> getCollectedData() { return collectedData; }
 
     private int processData() {
         int samplesRead = 0;
@@ -38,6 +42,7 @@ public class MyVmsimpleSubscriber {
 
                 if (info.valid_data) {
                     System.out.println("Received" + dataSeq.get(i));
+                    collectedData.add(dataSeq.get(i));
                 }
                 samplesRead++;
             }
@@ -51,11 +56,11 @@ public class MyVmsimpleSubscriber {
         return samplesRead;
     }
 
-    private void runApplication() {
+    public void runSubscriber() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
-                getDomainId(),
+                0,
                 DomainParticipantFactory.PARTICIPANT_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
@@ -74,13 +79,13 @@ public class MyVmsimpleSubscriber {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example VmSimple",
+                "Example ddsgen.VmSimple",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataReader reads data on "Example VmSimple" Topic
+        // This DataReader reads data on "Example ddsgen.VmSimple" Topic
         reader = (VmSimpleDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,

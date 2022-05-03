@@ -5,7 +5,12 @@ import com.rti.dds.domain.DomainParticipantFactory;
 import com.rti.dds.infrastructure.*;
 import com.rti.dds.subscription.*;
 import com.rti.dds.topic.Topic;
+import ddsgen.DatacenterSimple;
+import ddsgen.DatacenterSimpleDataReader;
+import ddsgen.DatacenterSimpleSeq;
+import ddsgen.DatacenterSimpleTypeSupport;
 
+import javax.xml.crypto.Data;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -16,11 +21,11 @@ public class MyDatacenterSubscriber {
     private final SampleInfoSeq infoSeq = new SampleInfoSeq();
 
     private int sampleNumber = 0;
-    private final ArrayList<MyDatacenterSubscriber> collectedData = new ArrayList<>();
+    private final ArrayList<DatacenterSimple> collectedData = new ArrayList<>();
 
     public MyDatacenterSubscriber(int sampleNumber) {this.sampleNumber = sampleNumber; }
 
-    public ArrayList<MyDatacenterSubscriber> getCollectedData() {return collectedData;}
+    public ArrayList<DatacenterSimple> getCollectedData() {return collectedData;}
     private int processData() {
         int samplesRead = 0;
 
@@ -37,6 +42,7 @@ public class MyDatacenterSubscriber {
 
                 if (info.valid_data) {
                     System.out.println("Received" + dataSeq.get(i));
+                    collectedData.add(dataSeq.get(i));
                 }
                 samplesRead++;
             }
@@ -50,11 +56,11 @@ public class MyDatacenterSubscriber {
         return samplesRead;
     }
 
-    private void runSubscriber() {
+    public void runSubscriber() {
         // Start communicating in a domain
         participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
-                getDomainId(),
+                0,
                 DomainParticipantFactory.PARTICIPANT_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
@@ -73,13 +79,13 @@ public class MyDatacenterSubscriber {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example DatacenterSimple",
+                "Example ddsgen.DatacenterSimple",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataReader reads data on "Example DatacenterSimple" Topic
+        // This DataReader reads data on "Example ddsgen.DatacenterSimple" Topic
         reader = (DatacenterSimpleDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,
