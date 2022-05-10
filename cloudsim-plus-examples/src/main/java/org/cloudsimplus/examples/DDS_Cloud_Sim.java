@@ -14,6 +14,7 @@ public class DDS_Cloud_Sim {
     public static void main(String[] args) {
         DDS_Cloud_Sim dds_cloud_sim = new DDS_Cloud_Sim();
         dds_cloud_sim.runSimulationDDSData();
+
     }
 }
 
