@@ -1,14 +1,16 @@
-package ddsgen;
+
 
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl
+This file was generated from .idl 
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
+
+package ddsgen;
 
 import com.rti.dds.infrastructure.InstanceHandle_t;
 import com.rti.dds.subscription.DataReaderImpl;
@@ -21,7 +23,7 @@ import com.rti.dds.topic.TypeSupportImpl;
 // ===========================================================================
 
 /**
-* A reader for the ddsgen.HostSimple user type.
+* A reader for the HostSimple user type.
 */
 public class HostSimpleDataReader extends DataReaderImpl {
     // -----------------------------------------------------------------------
@@ -42,7 +44,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
         view_states, instance_states);
     }
 
-    public void read_w_condition(HostSimpleSeq received_data,
+    public void read_w_condition(HostSimpleSeq received_data, 
     SampleInfoSeq info_seq,
     int max_samples,
     ReadCondition condition) {
@@ -50,7 +52,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
         condition);
     }
 
-    public void take_w_condition(HostSimpleSeq received_data,
+    public void take_w_condition(HostSimpleSeq received_data, 
     SampleInfoSeq info_seq,
     int max_samples,
     ReadCondition condition) {
@@ -86,7 +88,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
     SampleInfoSeq info_seq, int max_samples,
     InstanceHandle_t a_handle, ReadCondition condition) {
 
-        read_instance_w_condition_untyped(received_data, info_seq,
+        read_instance_w_condition_untyped(received_data, info_seq, 
         max_samples, a_handle, condition);
     }
 
@@ -94,7 +96,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
     SampleInfoSeq info_seq, int max_samples,
     InstanceHandle_t a_handle, ReadCondition condition) {
 
-        take_instance_w_condition_untyped(received_data, info_seq,
+        take_instance_w_condition_untyped(received_data, info_seq, 
         max_samples, a_handle, condition);
     }
 
@@ -120,7 +122,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
     SampleInfoSeq info_seq, int max_samples,
     InstanceHandle_t a_handle, ReadCondition condition) {
 
-        read_next_instance_w_condition_untyped(received_data, info_seq,
+        read_next_instance_w_condition_untyped(received_data, info_seq, 
         max_samples, a_handle, condition);
     }
 
@@ -128,7 +130,7 @@ public class HostSimpleDataReader extends DataReaderImpl {
     SampleInfoSeq info_seq, int max_samples,
     InstanceHandle_t a_handle, ReadCondition condition) {
 
-        take_next_instance_w_condition_untyped(received_data, info_seq,
+        take_next_instance_w_condition_untyped(received_data, info_seq, 
         max_samples, a_handle, condition);
     }
 

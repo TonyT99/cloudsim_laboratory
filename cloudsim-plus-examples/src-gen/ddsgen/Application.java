@@ -1,4 +1,4 @@
-package ddsgen;/*
+/*
 * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
 * RTI grants Licensee a license to use, modify, compile, and create derivative
 * works of the software solely for use with RTI Connext DDS. Licensee may
@@ -9,6 +9,8 @@ package ddsgen;/*
 * any incidental or consequential damages arising out of the use or inability
 * to use the software.
 */
+
+package ddsgen;
 
 import com.rti.ndds.config.LogVerbosity;
 

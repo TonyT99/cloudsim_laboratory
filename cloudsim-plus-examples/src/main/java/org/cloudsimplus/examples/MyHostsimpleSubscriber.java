@@ -79,7 +79,7 @@ public class MyHostsimpleSubscriber {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example ddsgen.HostSimple",
+                "Example HostSimple",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener

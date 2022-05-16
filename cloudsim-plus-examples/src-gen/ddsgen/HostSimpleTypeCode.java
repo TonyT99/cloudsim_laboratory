@@ -1,13 +1,15 @@
-package ddsgen;
+
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl
+This file was generated from .idl 
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
+
+package ddsgen;
 
 import com.rti.dds.typecode.*;
 
@@ -17,7 +19,7 @@ public class  HostSimpleTypeCode {
     private static TypeCode getTypeCode() {
         TypeCode tc = null;
         int __i=0;
-        StructMember sm[]=new StructMember[6];
+        StructMember sm[]=new StructMember[8];
         Annotations memberAnnotation;
 
         memberAnnotation = new Annotations();
@@ -50,11 +52,21 @@ public class  HostSimpleTypeCode {
         memberAnnotation.min_annotation(AnnotationParameterValue.MIN_ULONG);
         memberAnnotation.max_annotation(AnnotationParameterValue.MAX_ULONG);
         sm[__i] = new  StructMember("size", false, (short)-1,  false, TypeCode.TC_ULONG, 5, false, memberAnnotation);__i++;
+        memberAnnotation = new Annotations();
+        memberAnnotation.default_annotation(AnnotationParameterValue.ZERO_ULONG);
+        memberAnnotation.min_annotation(AnnotationParameterValue.MIN_ULONG);
+        memberAnnotation.max_annotation(AnnotationParameterValue.MAX_ULONG);
+        sm[__i] = new  StructMember("peNumber", false, (short)-1,  false, TypeCode.TC_ULONG, 6, false, memberAnnotation);__i++;
+        memberAnnotation = new Annotations();
+        memberAnnotation.default_annotation(AnnotationParameterValue.ZERO_ULONG);
+        memberAnnotation.min_annotation(AnnotationParameterValue.MIN_ULONG);
+        memberAnnotation.max_annotation(AnnotationParameterValue.MAX_ULONG);
+        sm[__i] = new  StructMember("mips", false, (short)-1,  false, TypeCode.TC_ULONG, 7, false, memberAnnotation);__i++;
 
         Annotations annotation = new Annotations();
         annotation.allowed_data_representation_mask(5);
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("ddsgen.HostSimple",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm , annotation);
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("HostSimple",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm , annotation);        
         return tc;
     }
 }

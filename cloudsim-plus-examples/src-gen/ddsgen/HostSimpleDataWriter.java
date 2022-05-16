@@ -1,14 +1,16 @@
-package ddsgen;
+
 
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl
+This file was generated from .idl 
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
 or consult the Code Generator User's Manual.
 */
+
+package ddsgen;
 
 import com.rti.dds.infrastructure.Time_t;
 import com.rti.dds.infrastructure.WriteParams_t;
@@ -19,7 +21,7 @@ import com.rti.dds.topic.TypeSupportImpl;
 
 // ===========================================================================
 /**
-* A writer for the ddsgen.HostSimple user type.
+* A writer for the HostSimple user type.
 */
 public class HostSimpleDataWriter extends DataWriterImpl {
     // -----------------------------------------------------------------------

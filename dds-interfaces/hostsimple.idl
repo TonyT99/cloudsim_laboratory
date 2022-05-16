@@ -6,4 +6,6 @@ struct HostSimple {
     unsigned long ram; // Sets RAM capacity in Megabytes.
     unsigned long bw; // Sets the bandwidth capacity (in Megabits/s)
     unsigned long size; // Sets the storage size (capacity) of the VM image in Megabytes.
+    unsigned long peNumber; // Determines how many processing units the HostSimple will have.
+    unsigned long mips; // Determines the capacity of the PE-s present in the host.
 };

@@ -1,4 +1,4 @@
-package ddsgen;/*
+/*
 * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
 * RTI grants Licensee a license to use, modify, compile, and create derivative
 * works of the software solely for use with RTI Connext DDS. Licensee may
@@ -9,6 +9,8 @@ package ddsgen;/*
 * any incidental or consequential damages arising out of the use or inability
 * to use the software.
 */
+
+package ddsgen;
 
 import java.util.Objects;
 
@@ -92,13 +94,13 @@ public class HostSimpleSubscriber extends Application implements AutoCloseable {
         // Create a Topic with a name and a datatype
         Topic topic = Objects.requireNonNull(
             participant.create_topic(
-                "Example ddsgen.HostSimple",
+                "Example HostSimple",
                 typeName,
                 DomainParticipant.TOPIC_QOS_DEFAULT,
                 null, // listener
                 StatusKind.STATUS_MASK_NONE));
 
-        // This DataReader reads data on "Example ddsgen.HostSimple" Topic
+        // This DataReader reads data on "Example HostSimple" Topic
         reader = (HostSimpleDataReader) Objects.requireNonNull(
             subscriber.create_datareader(
                 topic,

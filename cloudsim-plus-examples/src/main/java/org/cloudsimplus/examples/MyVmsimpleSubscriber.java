@@ -116,6 +116,7 @@ public class MyVmsimpleSubscriber {
                 // Read condition triggered, process data
                 samplesRead += processData();
 
+                System.out.println(samplesRead);
             } catch (RETCODE_TIMEOUT timeout) {
                 // No data received, not a problem
                 System.out.printf("No data after %d seconds.%n", waitTimeout.sec);
