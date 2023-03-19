@@ -1,8 +1,8 @@
-
+package ddsgen;
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl 
+This file was generated from .idl
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
@@ -42,7 +42,7 @@ public class  CloudletTypeCode {
         Annotations annotation = new Annotations();
         annotation.allowed_data_representation_mask(5);
 
-        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("Cloudlet",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm , annotation);        
+        tc = TypeCodeFactory.TheTypeCodeFactory.create_struct_tc("Cloudlet",ExtensibilityKind.EXTENSIBLE_EXTENSIBILITY,  sm , annotation);
         return tc;
     }
 }

@@ -1,3 +1,4 @@
+package ddsgen;
 /*
 * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
 * RTI grants Licensee a license to use, modify, compile, and create derivative
@@ -19,7 +20,7 @@ import com.rti.dds.infrastructure.StatusKind;
 import com.rti.dds.publication.Publisher;
 import com.rti.dds.topic.Topic;
 
-/** 
+/**
 * Simple example showing all Connext code in one place for readability.
 */
 public class CloudletPublisher extends Application implements AutoCloseable {

@@ -1,3 +1,4 @@
+package ddsgen;
 /*
 * (c) Copyright, Real-Time Innovations, 2020.  All rights reserved.
 * RTI grants Licensee a license to use, modify, compile, and create derivative

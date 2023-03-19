@@ -1,9 +1,9 @@
 
-
+package ddsgen;
 /*
 WARNING: THIS FILE IS AUTO-GENERATED. DO NOT MODIFY.
 
-This file was generated from .idl 
+This file was generated from .idl
 using RTI Code Generator (rtiddsgen) version 3.1.0.
 The rtiddsgen tool is part of the RTI Connext DDS distribution.
 For more information, type 'rtiddsgen -help' at a command shell
@@ -53,7 +53,7 @@ public class Cloudlet   implements Copyable, Serializable{
 
         if (o == null) {
             return false;
-        }        
+        }
 
         if(getClass() != o.getClass()) {
             return false;
@@ -83,7 +83,7 @@ public class Cloudlet   implements Copyable, Serializable{
         __result += (int)ttl;
         __result += (int)peNumber;
         __result += (int)utilizationModelParam;
-        __result += modelType.hashCode(); 
+        __result += modelType.hashCode();
         return __result;
     }
 
@@ -93,11 +93,11 @@ public class Cloudlet   implements Copyable, Serializable{
     * This method could be placed into <code>CloudletTypeSupport</code>
     * rather than here by using the <code>-noCopyable</code> option
     * to rtiddsgen.
-    * 
+    *
     * @param src The Object which contains the data to be copied.
     * @return Returns <code>this</code>.
     * @exception NullPointerException If <code>src</code> is null.
-    * @exception ClassCastException If <code>src</code> is not the 
+    * @exception ClassCastException If <code>src</code> is not the
     * same type as <code>this</code>.
     * @see com.rti.dds.infrastructure.Copyable#copy_from(java.lang.Object)
     */
@@ -127,14 +127,14 @@ public class Cloudlet   implements Copyable, Serializable{
             strBuffer.append(desc).append(":\n");
         }
 
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("ttl: ").append(this.ttl).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("peNumber: ").append(this.peNumber).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("utilizationModelParam: ").append(this.utilizationModelParam).append("\n");  
-        CdrHelper.printIndent(strBuffer, indent+1);        
-        strBuffer.append("modelType: ").append(this.modelType).append("\n");  
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("ttl: ").append(this.ttl).append("\n");
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("peNumber: ").append(this.peNumber).append("\n");
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("utilizationModelParam: ").append(this.utilizationModelParam).append("\n");
+        CdrHelper.printIndent(strBuffer, indent+1);
+        strBuffer.append("modelType: ").append(this.modelType).append("\n");
 
         return strBuffer.toString();
     }
