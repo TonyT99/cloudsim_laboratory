@@ -1,0 +1,8 @@
+// Configuration parameters for a cloudlet
+
+struct Cloudlet {
+	long ttl;					// How long will the cloudlet take to finish its designated process?
+	long peNumber;				// How many PE-s will the cloudlet have?
+	long utilizationModelParam;	// What is the parameter of the UtilizationModel ie. what percentage of the total VM time will the cloudlet use
+	string modelType;			// Is the UtilizationModel full or dynamic?
+};
