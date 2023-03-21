@@ -48,7 +48,7 @@ public class CloudletPublisher extends Application implements AutoCloseable {
          * Note that you can specify the absolute path of the XML QoS file
          * to avoid this problem.
          */
-        factoryQos.profile.url_profile.add("C:\\Users\\Toncsi\\rtiProjects\\cloudsim_laboratory\\cloudsim-plus-examples\\src-gen\\Cloudlet_qos_profile.xml");
+        factoryQos.profile.url_profile.add("C:\\Users\\Admin\\IdeaProjects\\cloudsim_laboratory\\cloudsim-plus-examples\\src-gen\\Cloudlet_qos_profile.xml");
         DomainParticipantFactory.TheParticipantFactory.set_qos(factoryQos);
 
         // Start communicating in a domain
