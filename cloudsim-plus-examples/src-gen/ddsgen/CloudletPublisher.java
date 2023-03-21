@@ -15,6 +15,7 @@ import java.util.Objects;
 
 import com.rti.dds.domain.DomainParticipant;
 import com.rti.dds.domain.DomainParticipantFactory;
+import com.rti.dds.domain.DomainParticipantFactoryQos;
 import com.rti.dds.infrastructure.InstanceHandle_t;
 import com.rti.dds.infrastructure.StatusKind;
 import com.rti.dds.publication.Publisher;
@@ -29,6 +30,27 @@ public class CloudletPublisher extends Application implements AutoCloseable {
     private DomainParticipant participant = null;
 
     private void runApplication() {
+        // Load custom QoS profile
+        DomainParticipantFactoryQos factoryQos =
+            new DomainParticipantFactoryQos();
+        DomainParticipantFactory.TheParticipantFactory.get_qos(factoryQos);
+
+        /* We are only going to add one XML file to the url_profile
+         * sequence, so we set a maximum length of 1.
+         */
+        factoryQos.profile.url_profile.setMaximum(1);
+
+        /* The XML file will be loaded from the working directory. That
+         * means, you need to run the example like this:
+         * ./objs/<architecture>/profiles_publisher
+         * (see README.txt for more information on how to run the example).
+         *
+         * Note that you can specify the absolute path of the XML QoS file
+         * to avoid this problem.
+         */
+        factoryQos.profile.url_profile.add("C:\\Users\\Toncsi\\rtiProjects\\cloudsim_laboratory\\cloudsim-plus-examples\\src-gen\\Cloudlet_qos_profile.xml");
+        DomainParticipantFactory.TheParticipantFactory.set_qos(factoryQos);
+
         // Start communicating in a domain
         participant = Objects.requireNonNull(
             DomainParticipantFactory.get_instance().create_participant(
@@ -59,10 +81,11 @@ public class CloudletPublisher extends Application implements AutoCloseable {
 
         // This DataWriter writes data on "Example Cloudlet" Topic
         CloudletDataWriter writer = (CloudletDataWriter) Objects.requireNonNull(
-            publisher.create_datawriter(
+            publisher.create_datawriter_with_profile(
                 topic,
-                Publisher.DATAWRITER_QOS_DEFAULT,
-                null, // listener
+                "profiles_Library",
+                "cloudlet_profile",
+                null,
                 StatusKind.STATUS_MASK_NONE));
 
         // Create data sample for writing
