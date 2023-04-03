@@ -19,7 +19,7 @@ public class Cloudlet   implements Copyable, Serializable{
 
     public int ttl = (int)0;
     public int peNumber = (int)0;
-    public int utilizationModelParam = (int)0;
+    public double utilizationModelParam = (double)0;
     public String modelType= (String)""; /* maximum length = (255) */
 
     public Cloudlet() {

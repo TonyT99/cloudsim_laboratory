@@ -76,11 +76,11 @@ public class HostSimplePublisher extends Application implements AutoCloseable {
             data.id = (short) samplesWritten;
             data.datacenterId = (short) samplesWritten;
             data.timestampOfReport = samplesWritten;
-            data.ram = samplesWritten;
-            data.bw = samplesWritten;
-            data.size = samplesWritten;
-            data.peNumber = samplesWritten;
-            data.mips = samplesWritten;
+            data.ram = 30000;
+            data.bw = 30000;
+            data.size = 30000;
+            data.peNumber = 30000;
+            data.mips = 30000;
 
             System.out.println("Writing HostSimple, count " + samplesWritten);
 

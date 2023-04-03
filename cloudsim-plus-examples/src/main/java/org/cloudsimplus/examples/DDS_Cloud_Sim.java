@@ -26,11 +26,13 @@ public class DDS_Cloud_Sim {
     private Datacenter datacenter0;
     private CloudSim simulation;
 
-    public void runSimulationDDSData(){
+    public void runSimulationDDSData() {
         simulation = new CloudSim();
         configurator.runConfigurator();
+        ArrayList<ddsgen.Cloudlet> cloudletData = configurator.getCloudlets();
 
         for(ddsgen.VmSimple vmData : configurator.getVms()) {
+            System.out.println(vmData.toString());
             int mips = vmData.mips;
             int numberOfPEs = 4;
             int ram = vmData.ram;
@@ -42,6 +44,7 @@ public class DDS_Cloud_Sim {
         }
 
         for(ddsgen.HostSimple hostData : configurator.getHosts()) {
+            System.out.println(hostData.toString());
             ArrayList<Pe> pes = new ArrayList<>();
             int ram = hostData.ram;
             int bw = hostData.bw;
@@ -55,10 +58,10 @@ public class DDS_Cloud_Sim {
 
         datacenter0 = new DatacenterSimple(simulation, hostList);
 
-        UtilizationModelDynamic utilizationModel = new UtilizationModelDynamic(0.5);
-
-        for (int i = 0; i < 1; i++) {
-            final var cloudlet = new CloudletSimple(10_000, 2, utilizationModel);
+        for (int i = 0; i < cloudletData.size(); i++) {
+            System.out.println(cloudletData.get(i).toString());
+            UtilizationModelDynamic utilizationModel = new UtilizationModelDynamic(cloudletData.get(i).utilizationModelParam);
+            final var cloudlet = new CloudletSimple(cloudletData.get(i).ttl, cloudletData.get(i).peNumber, utilizationModel);
             cloudlet.setSizes(1024);
             cloudletList.add(cloudlet);
         }

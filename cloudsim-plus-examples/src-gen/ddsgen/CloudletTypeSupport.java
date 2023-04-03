@@ -365,7 +365,7 @@ public class CloudletTypeSupport extends TypeSupportImpl {
 
             dst.writeInt(typedSrc.ttl);
             dst.writeInt(typedSrc.peNumber);
-            dst.writeInt(typedSrc.utilizationModelParam);
+            dst.writeDouble(typedSrc.utilizationModelParam);
             dst.writeString(typedSrc.modelType,255);
             if(!xcdr1){
                 if (dheaderPosition != -1) {
@@ -480,7 +480,7 @@ public class CloudletTypeSupport extends TypeSupportImpl {
                 dst.inBaseClass = false;
                 dst.writeInt(typedSrc.ttl);
                 dst.writeInt(typedSrc.peNumber);
-                dst.writeInt(typedSrc.utilizationModelParam);
+                dst.writeDouble(typedSrc.utilizationModelParam);
                 dst.writeString(typedSrc.modelType,255);
             }
 
@@ -534,7 +534,7 @@ public class CloudletTypeSupport extends TypeSupportImpl {
             try{
                 typedDst.ttl = src.readInt();
                 typedDst.peNumber = src.readInt();
-                typedDst.utilizationModelParam = src.readInt();
+                typedDst.utilizationModelParam = src.readDouble();
                 typedDst.modelType = src.readString(255);
 
             } catch (IllegalCdrStateException stateEx) {

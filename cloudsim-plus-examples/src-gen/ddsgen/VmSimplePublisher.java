@@ -74,11 +74,11 @@ public class VmSimplePublisher extends Application implements AutoCloseable {
             data.id = (short) samplesWritten;
             data.hostId = (short) samplesWritten;
             data.timestampOfReport = samplesWritten;
-            data.mips = samplesWritten;
-            data.numberOfPEs = samplesWritten;
-            data.ram = samplesWritten;
-            data.bw = samplesWritten;
-            data.size = samplesWritten;
+            data.mips = 5000;
+            data.numberOfPEs = 5000;
+            data.ram = 5000;
+            data.bw = 5000;
+            data.size = 5000;
 
             System.out.println("Writing ddsgen.VmSimple, count " + samplesWritten);
 
